@@ -1,0 +1,48 @@
+/* Footer Styles */
+footer {
+  background-color: #fff;
+  padding: 50px 0 30px;
+  font-size: 14px;
+
+  @media screen and (max-width: 767px) {
+    padding: 40px 0 10px;
+  } 
+
+  .left {
+    @media screen and (max-width: 767px) {
+      margin-bottom: 15px;
+    }
+
+    p {
+      margin: 0 0 20px 0;
+    }
+  }
+
+  .right {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    -webket-transform: translateY(-50%);
+    transform: translateY(-50%);
+
+    @media screen and (max-width: 767px) {
+      position: initial;
+      -webkit-transform: initial;
+      transform: initial;
+      text-align: right;
+    }
+  }
+
+  .social_icon {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background-color: #1e1e1e;
+    border-radius: 50%;
+    margin-left: 10px;
+
+    a {
+      display: block;
+    }
+  }
+} 
