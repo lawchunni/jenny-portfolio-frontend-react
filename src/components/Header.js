@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import logo from '../assets/images/logo.svg';
 
 function Header() {
@@ -17,41 +18,41 @@ function Header() {
             <nav>
               { /*hamburger icon: mobile only */ }
               <a href="#" id="hamburger" title="hamburger icon">
-              <span></span>
-              <span></span>
-              <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
               </a>
 
               { /*nav menu list: desktop only */ }
               <ul> 
                 <li>
-                  <a className="Home" href="/" title="Home">Home</a>
+                  <Link className="home" to="/" title="Home">Home</Link>
                 </li>
                 <li>
-                  <a className="Portfolio" href="portfolio" title="Portfolio">Portfolio</a>
+                  <Link className="portfolio" to="portfolio" title="Portfolio">Portfolio</Link>
                 </li>
                 <li>
-                  <a className="Contact" href="contact-me" title="Contact me">Contact Me</a>
+                  <Link className="contact" to="/contact-me" title="Contact me">Contact Me</Link>
                 </li>
 
                 { /* TODO::  Login/Login logic */ }
                 <li>
-                  <a className="login_btn" href="/login" title="Login">Login</a>
+                  <Link className="login_btn" to="/login" title="Login">Login</Link>
                 </li>
                 <li>
-                  <a href="/admin" title="Dashboard">Logout</a>
+                  <Link to="/logout" title="Dashboard">Logout</Link>
                 </li>
                 { /* TODO::  if admin ----->>>> show admin */ }
                 <li>
-                  <a href="/admin" title="Dashboard">Admin</a>
+                  <Link to="/admin" title="Dashboard">Admin</Link>
                 </li>
                 
               </ul>
 
               { /*Search Box */ }
             </nav>
+            
           </div>
-          
         </div>
       </header>
     </>

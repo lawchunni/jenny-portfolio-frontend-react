@@ -15,12 +15,12 @@ function Footer() {
           </div>
           <div className="right icon">
             <div className="social_icon">
-              <a href="https://www.linkedin.com/in/jenny-puichingchung/" target="_blank" title="Linkedin">
+              <a href="https://www.linkedin.com/in/jenny-puichingchung/" target="_blank" rel="noreferrer" title="Linkedin">
                 <img src={ linkedin } alt="linkedin icon" width={35} height={35} />
               </a>
             </div>
             <div className="social_icon">
-              <a href="https://api.whatsapp.com/send?phone=12049968808" target="_blank" title="Whatsapp">
+              <a href="https://api.whatsapp.com/send?phone=12049968808" target="_blank" rel="noreferrer" title="Whatsapp">
                 <img src={ whatsapp } alt="whatsapp icon" width={35} height={35} />
               </a>
             </div>
