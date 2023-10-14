@@ -1,0 +1,454 @@
+/* Banner Styles */
+#banner {
+  position: relative;
+  background-color: #fdda2c;
+
+  .wrapper {
+    min-height: 450px;
+    padding: 0;
+
+    @media screen and (max-width: 580px) { 
+      min-height: 370px;
+    }
+  }
+
+  p {
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .left {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    @include transform(translateY(-50%));
+    max-width: 600px;
+    z-index: 1;
+
+    @media screen and (max-width: 767px) {
+      position: initial;
+      top: auto;
+      -webkit-transform: initial;
+      transform: initial;
+      padding: 20px 15px 0;
+      max-width: 500px;
+    }
+
+    h1 {
+      @media screen and (max-width: 767px) {
+        width: 412px;
+      }
+
+      @media screen and (max-width: 580px) { 
+        width: 340px;
+      }
+
+      @media screen and (max-width: 380px) { 
+        width: 306px;
+      }
+    }
+
+    h2 {
+      font-size: 30px;
+      color: #000;
+      text-align: left;
+      font-family: 'courier new', courier, serif;
+      font-weight: 700;
+      background-color: #fff;
+      line-height: 1.2em;
+      padding: 5px 15px;
+      width: 546px;
+      border-right: 3px solid;
+      overflow: hidden;
+      white-space: nowrap;
+      @include animation(progress 2s steps(22), .4s, blink .5s step-end infinite alternate);
+      margin-bottom: 18px;
+    }
+
+    p {
+      background-color: #000;
+      display: inline-block;
+      color: #fdda2c;
+      line-height: 1.2em;
+      padding: 5px 15px;
+      margin-top: 0;
+      margin-bottom: 10px;
+
+      @media screen and (max-width: 767px) {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .dot_layer {
+    max-width: 1200px;
+    position: absolute;
+    right: -90px;
+    bottom: -117px;
+    @include animation(fadein 3s ease);
+
+    @media screen and (max-width: 767px) {
+      bottom: -54px;
+      right: -10%;
+    }
+
+    img {
+      @media screen and (max-width: 767px) {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+
+  .portrait {
+    max-width: 350px;
+    position: absolute;
+    right: 0;
+    bottom: -130px;
+    -webkit-transform-origin: bottom;
+    transform-origin: bottom;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    @include animation(fold 1.2s ease-in-out);
+
+    @media screen and (max-width: 870px) {
+      max-width: 300px;
+    }
+
+    @media screen and (max-width: 767px) {
+      max-width: initial;
+      width: 40%;
+      bottom: -80px;
+    }
+
+    @media screen and (max-width: 580px) { 
+      width: 42%;
+      bottom: -44px;
+    }
+
+    @media screen and (max-width: 380px) { 
+      bottom: -10px;
+    }
+
+    img { 
+      @media screen and (max-width: 767px) {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+
+  /* banner decoration */
+  .waves-animation {
+    position: absolute;
+    width: 100%;
+    bottom: -90px;
+
+    path {
+      fill: #4969b8!important;
+    }
+  }
+}
+
+#work_desc {
+  color: #fff;
+  padding: 40px 0;
+
+  @media screen and (max-width: 767px) {
+    padding: 0 0 40px 0;
+  }
+
+  .wrapper {
+    padding: 0 ;
+  }
+
+  .item {
+    padding: 0 15px;
+
+    @media screen and (max-width: 767px) {
+      margin-bottom: 40px;
+      max-width: 420px;
+    }
+  }
+
+  .circle_icon {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    position: relative;
+
+    .circle {
+      position: absolute;
+      background-color: #fff;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      border-radius: 50%;
+      @include transition(all .3s);
+    }
+
+    &:hover {
+      .circle {
+        @include transform(all scale(1.2));
+      }
+
+      img.work-icon {
+        @include animation(bounce 1s ease-in-out infinite both);
+      }
+
+      img.shadow {
+        opacity: .2;
+      }
+    }
+
+    img.work-icon {
+      max-width: fit-content;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      @include transform(translate(-50%, -50%));
+    }
+
+    img.shadow {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      opacity: 0;
+      @include transform(translateX(-50%));
+      @include transition(all .5s);
+    }
+  }
+
+  .info {
+    margin-top: 40px;
+
+    .title {
+      position: relative;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 20px;
+
+      &::after {
+        content: '';
+        position: absolute;
+        width: 90%;
+        height: 2px;
+        left: 0;
+        bottom: -10px;
+        background-color: #fdda2c;
+      }
+    }
+  }
+
+  .call_to_action {
+    margin-top: 40px;
+    min-height: 160px;
+
+    .button {
+      width: 100%;
+
+      a {
+        display: block;
+        max-width: 220px;
+        text-align: center;
+        background-color: #fdda2c;
+        margin: 0 auto;
+        padding: 12px 30px;
+        border-radius: 20px;
+        color: #494949;
+        text-decoration: none;
+        font-size: 18px;
+        box-shadow: 2px 2px 10px rgba(0,0,0,.2);
+        border: 1px solid #fdda2c;
+        @include transition(all .3s);
+
+        &:hover {
+          background-color: #4969b8;
+          border: 1px solid #fdda2c;
+          color: #fdda2c;
+          @include transform(all scale(1.1));
+          text-shadow: 2px 2px 10px rgba(0,0,0,.2);
+        }
+      }
+    }
+    
+    .indic_arr {
+      width: 150px;
+      position: absolute;
+      left: 32%;
+      bottom: 0;
+
+      @media screen and (max-width: 767px) {
+        left: 28%;
+        bottom: -14px;
+      }
+
+      span {
+        position: absolute;
+        left: -50px;
+        top: -20px;
+      }
+    }
+  }
+}
+
+/* =============== My Skills section =============== */
+#my_skills {
+  h1 {
+    text-align: left;
+  }
+
+  h3 { 
+    color: #fff;
+    font-weight: 400;
+    margin: 8px 0;
+    font-size: 16px;
+    text-align: left;
+  }
+
+  p {
+    color: #fff;
+  }
+
+  .left, .right {
+    display: inline-block;
+    vertical-align: top;
+
+    @media screen and (max-width: 767px) {
+      width: 100%;
+    }
+  }
+
+  .left {
+    width: 40%;
+  }
+
+  .right {
+    width: 59%; 
+
+    @media screen and (max-width: 767px) {
+      padding-bottom: 40px;
+    }
+  }
+
+  /* progress bar + animation */
+  .progress-bar{
+    width: 100%;
+    height: 10px;
+    background-color: #fff;
+    border: 1px solid #fdda2c;
+    border-radius: 5px;
+
+    .percentage {
+      display: block;
+      height: 100%;
+      background-color: #fdda2c;
+      border-radius: 5px;
+      @include animation(progress 1500ms ease-in 1);
+
+      &.design {
+        width: 75%;
+      }
+
+      &.frontend {
+        width: 90%;
+      }
+
+      &.backend {
+        width: 80%;
+      }
+
+      &.launch {
+        width: 100%;
+      }
+    }
+  }
+
+  .progress-bar-container {
+    width: 70%;
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+
+  /* IT language animation */
+  .languages {
+    font-family: 'Kanit', sans-serif;
+    font-weight: 500;
+    color: #4969b8;
+    position: absolute;
+    left: calc(40% + 80px);
+    top: 50%;
+    @include transform(translateY(-50%));
+
+    @media screen and (max-width: 767px) {
+      left: auto;
+      position: initial;
+      top: auto;
+      -webkit-transform: initial;
+      transform: initial;
+    }
+
+    .words {
+      font-size: 0;
+
+      span {
+        &:nth-child(2) {
+          @include animation-delay(0.5s);
+        }
+
+        &:nth-child(3) {
+          @include animation-delay(1s);
+        }
+
+        &:nth-child(4) {
+          @include animation-delay(1.5s);
+        }
+
+        &:nth-child(5) {
+          @include animation-delay(2s);
+        }
+
+        &:nth-child(6) {
+          @include animation-delay(2.5s);
+        }
+        
+        &:nth-child(7) {
+          @include animation-delay(3s);
+        }
+
+        &:nth-child(8) {
+          @include animation-delay(3.5s);
+        }
+
+        &:nth-child(9) {
+          @include animation-delay(4s);
+        }
+
+        &:nth-child(10) {
+          @include animation-delay(4.5s);
+        }
+      }
+    }
+
+    span {
+      display: inline-block;
+      @include animation (textmove 4s ease-in-out infinite);
+      line-height: 1.2em;
+    }
+
+    .word-1, .word-3 {
+      margin-left: 40px;
+
+      span {
+        font-size: 70px;
+      }
+    }
+
+    .word-2 {
+      span {
+        font-size: 80px;
+      }
+    }
+  }
+}

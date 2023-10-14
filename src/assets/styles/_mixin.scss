@@ -1,0 +1,19 @@
+@mixin transition ($prop...) {
+  -webkit-transition: $prop;
+  transition: $prop;
+}
+
+@mixin transform ($prop) {
+  -webkit-transform: $prop;
+  transform: $prop;
+}
+
+@mixin animation ($prop...) {
+  -webkit-animation: $prop;
+  animation: $prop;
+}
+
+@mixin animation-delay ($prop) {
+  -webkit-animation-delay: $prop;
+  animation-delay: $prop;
+}

@@ -1,0 +1,125 @@
+@import '_mixin';
+
+/* Home page banner texts & My Skills page progress bar animation */
+@-webkit-keyframes progress {
+  from {
+    width: 0;
+  }
+}
+
+@keyframes progress {
+  from {
+    width: 0;
+  }
+}
+
+@-webkit-keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+/* Home page banner section portrait animation */
+@-webkit-keyframes fold {
+  0% {
+    @include transform(rotateX(90deg));
+  }
+  100% {
+    @include transform(rotateX(0deg));
+  }
+}
+
+@keyframes fold {
+  0% {
+    transform: rotateX(90deg);
+  }
+  100% {
+    transform: rotateX(0deg);
+  }
+}
+
+/* Home page banner section background dots animation */
+@-webkit-keyframes fadein {
+  0% {
+      opacity: 0;
+  }
+
+  30% {
+      opacity: 0;
+  }
+
+  100% {
+      opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+
+  30% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Home page work description section animation */
+@-webkit-keyframes bounce {
+  0%, 100%, 20%, 50%, 80% {
+    @include transform(translate(-50%, -50%));
+  }
+  40% {
+    @include transform(translate(-50%, -70%));
+  }
+  60% {
+    @include transform(translate(-50%, -60%));
+  }
+}
+
+@keyframes bounce {
+  0%, 100%, 20%, 50%, 80% {
+    transform: translate(-50%, -50%);
+  }
+  40% {
+    transform: translate(-50%, -70%);
+  }
+  60% {
+    transform: translate(-50%, -60%);
+  }
+}
+
+/* My Skills page text move animation */
+@-webkit-keyframes textmove {
+  0% {
+    @include transform(translate(-30%, 0));
+  }
+  50% {
+    text-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+  }
+  100% {
+    @include transform(translate(30%, 0));
+  }
+}
+
+@keyframes textmove {
+  0% {
+    transform: translate(-30%, 0);
+  }
+  50% {
+    text-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+  }
+  100% {
+    transform: translate(30%, 0);
+  }
+}
+/* End of Animation keyframe rules */
