@@ -1,4 +1,28 @@
+import { Link } from 'react-router-dom';
+
 function Home() {
+
+  const portfolio = [
+    {
+      title: 'Work 1',
+      description: 'Lorem ipsum dolor sit amet, consectetur adip.',
+      img: 'UX-Mockup.png',
+      imgdesc: 'img desc'
+    },
+    {
+      title: 'Work 2',
+      description: 'Lorem ipsum dolor sit amet, consectetur adip.',
+      img: 'Coding.png',
+      imgdesc: 'img desc'
+    },
+    {
+      title: 'Work 3',
+      description: 'Lorem ipsum dolor sit amet, consectetur adip.',
+      img: 'Launch-Website.png',
+      imgdesc: 'img desc'
+    }
+  ]
+
   return (
     <div>
       <section id="banner">
@@ -37,53 +61,33 @@ function Home() {
         </div>
       </section>
 
-      {/* section 2: Work description */}
+      {/* section 2: Portfolio Highlight */}
       <section id="work_desc">
         <div className="wrapper">
-          <h2>&lt;h2&gt;What Do I Do&lt;/h2&gt;</h2>
+          <h2>&lt;h2&gt;Portfolio Highlight&lt;/h2&gt;</h2>
 
-          {/* Work description: column 1 */}
-          <div className="col col-4 item">
-            <div className="circle_icon">
-            <span className="circle"></span>
-            <img className="work-icon" src={ require('../assets/images/UX-Mockup.png') } alt="UX Mockup" width={145} height={93} />
-            <img className="shadow" src={ require('../assets/images/blurry-shadow.png') } alt="blurry shadow" width={60} height={24} />
-            </div>
-            <div className="info">
-            <div className="title">I <span style={{color: '#fdda2c'}}>design</span> your website</div>
-            <p>Tell me about your website, and I'll create a UX and UI design of the entire site for you.</p>
-            </div>
-          </div>
-          {/* Work description: column 2 */}
-          <div className="col col-4 item">
-            <div className="circle_icon">
-            <span className="circle"></span>
-            <img className="work-icon" src={ require('../assets/images/Coding.png') } alt="Coding" width={130} height={123} />
-            <img className="shadow" src={ require('../assets/images/blurry-shadow.png') } alt="blurry shadow" width={60} height={24} />
-            </div>
-            <div className="info">
-            <div className="title">I <span style={{color: '#fdda2c'}}>code</span> your website</div>
-            <p>The Frontend, Backend and Security parts will be included in the web development progress, and I will choose the most suitable languages for your website. </p>
-            </div>
-          </div>
-          {/* Work description: column 3 */}
-          <div className="col col-4 item">
-            <div className="circle_icon">
-            <span className="circle"></span>
-            <img className="work-icon" src={ require('../assets/images/Launch-Website.png') } alt="Launch Website" width={151} height={97} />
-            <img className="shadow" src={ require('../assets/images/blurry-shadow.png') } alt="blurry shadow" width={60} height={24} />
-            </div>
-            <div className="info">
-            <div className="title">I <span style={{color: '#fdda2c'}}>Launch</span> your website</div>
-            <p>After the design and coding progress are finished, and everything is approved during the web UAT session, I will help launch the website on your server (or I will provide one for you). </p>
-            </div>
-          </div>
+          {
+            portfolio.map((item, idx) => (
+              <div key={idx} className="col col-4 item">
+                <div className="circle_icon">
+                  <span className="circle"></span>
+                  <img className="work-icon" src={ require('../assets/images/' + item.img) } alt={ item.imgdesc } width={145} height={93} />
+                  <img className="shadow" src={ require('../assets/images/blurry-shadow.png') } alt="blurry shadow" width={60} height={24} />
+                </div>
+                <div className="info">
+                  <div className="title">{ item.title }</div>
+                  <p>{ item.description }</p>
+                </div>
+              </div>
+            ))
+          }
+
           <div className="call_to_action">
             <div className="button">
-            <a href="/?p=portfolio" title="Portfolio">Go to My Portfolio</a>
+            <Link to="/portfolio" title="Portfolio">Go to My Portfolio</Link>
             </div>
             <div className="indic_arr">
-            <span>Check out <br />my works :)</span>
+            <span>Check out <br />ALL my works :)</span>
             <img src={ require('../assets/images/arrow.png') } alt="arrow" width={131} height={80} />
             </div>
           </div>
@@ -92,45 +96,44 @@ function Home() {
 
       <section id="my_skills">
         <div className="wrapper">
+          <h2>&lt;h2&gt;My Skills&lt;/h2&gt;</h2>
+          {/* Left column */}
+          <div className="left">
 
-        <h2>&lt;h2&gt;My Skills&lt;/h2&gt;</h2>
-        {/* Left column */}
-        <div className="left">
+            <p>I am a web designer and full-stack developer. :)</p>
 
-          <p>I am a web designer and full-stack web developer. I graduated from the University of Winnipeg PACE :)</p>
-
-          {/* Skills Progress bar */}
-          <div className="progress-bar-container">
-          <div className="bar-content">
-              <h3>Design</h3>
-              <div className="progress-bar">
-              <span className="percentage design"></span>
+            {/* Skills Progress bar */}
+            <div className="progress-bar-container">
+              <div className="bar-content">
+                <h3>Design</h3>
+                <div className="progress-bar">
+                  <span className="percentage design"></span>
+                </div>
               </div>
-          </div>
 
-          <div className="bar-content">
-              <h3>Frontend</h3>
-              <div className="progress-bar">
-              <span className="percentage frontend"></span>
+              <div className="bar-content">
+                <h3>Frontend</h3>
+                <div className="progress-bar">
+                  <span className="percentage frontend"></span>
+                </div>
               </div>
-          </div>
 
-          <div className="bar-content">
-              <h3>Backend</h3>
-              <div className="progress-bar">
-              <span className="percentage backend"></span>
+              <div className="bar-content">
+                <h3>Backend</h3>
+                <div className="progress-bar">
+                  <span className="percentage backend"></span>
+                </div>
               </div>
-          </div>
 
-          <div className="bar-content">
-              <h3>Launch</h3>
-              <div className="progress-bar">
-              <span className="percentage launch"></span>
+              <div className="bar-content">
+                <h3>Operation</h3>
+                <div className="progress-bar">
+                  <span className="percentage launch"></span>
+                </div>
               </div>
-          </div>
-          </div>
+            </div>
 
-        </div>
+          </div>
 
           {/* Right column */}
           <div className="right">
@@ -168,7 +171,6 @@ function Home() {
 
           </div>
         </div>
-
       </section>
 
     </div>
