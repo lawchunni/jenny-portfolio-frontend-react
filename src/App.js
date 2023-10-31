@@ -19,6 +19,7 @@ function App() {
           <Header />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/portfolio" element={<Portfolio /> } />
           </Routes>
         </Router>
         <Footer />
