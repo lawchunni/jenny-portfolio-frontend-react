@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import Portfolio from './pages/Portfolio';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import PortfolioDetails from './pages/PortfolioDetails';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/portfolio" element={<Portfolio /> } />
+            <Route path="/portfolio-details/:id" element={<PortfolioDetails />} />
           </Routes>
         </Router>
         <Footer />

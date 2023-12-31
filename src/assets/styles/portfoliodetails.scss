@@ -1,0 +1,40 @@
+#portfolio_details {
+
+  .content {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: nowrap;
+
+    @media screen and (max-width: 767px) {
+      display: block;
+    }
+    .thumbnails {
+      width: 60%;
+      margin-right: 40px;
+
+      @media screen and (max-width: 767px) {
+        width: 100%;
+      }
+
+      img {
+        width: 100%;
+        margin-bottom: 20px;
+      }
+    }
+    .desc {
+      width: 40%;
+      color: #fff;
+
+      @media screen and (max-width: 767px) {
+        width: 100%;
+        margin-bottom: 40px;
+      }
+
+      h2 {
+        text-align: left;
+      }
+    }
+  }
+
+
+}
