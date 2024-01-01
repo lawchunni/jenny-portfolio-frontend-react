@@ -40,6 +40,9 @@
   .left {
     position: relative;
     min-height: 500px;
+    @media screen and (max-width: 767px) {
+      display: none;
+    }
   }
 
   .right {
@@ -53,11 +56,6 @@
   }  
 
   .portrait {
-
-    @media screen and (max-width: 767px) {
-      display: none;
-    }
-
     img {
       -webkit-transform: scaleX(-1);
       transform: scaleX(-1);
@@ -66,13 +64,11 @@
   }
 
   input, textarea {
-    background: transparent;
-    border: none;
-    border-bottom: 2px solid rgba(255,255,255,.7);
-    color: #fff;
+    background: #fff;
+    border: 2px solid rgba(255,255,255,.7);
     padding: 16px 10px;
     width: 100%;
-    font-size: 16px;
+    font-size: 14px;
     @include transition(all .3s ease-in-out);
 
     &:focus {
@@ -83,14 +79,9 @@
 
   .submit_button {
     width: 100%;
+    cursor: pointer;
   }
 
   /* Form placeholder styles */
-  ::-webkit-input-placeholder, ::placeholder, :-moz-placeholder, ::-moz-placeholder, ::-webkit-input-placeholder {
-    color: #fff;
-    font-size: 16px;
-    font-family: 'Kanit', sans-serif;
-    font-weight: 400;
-    opacity: .3;
-  }
+  
 }

@@ -32,7 +32,7 @@ function Header() {
                   <Link className="portfolio" to="portfolio" title="Portfolio">Portfolio</Link>
                 </li>
                 <li>
-                  <Link className="contact" to="/contact-me" title="Contact me">Contact Me</Link>
+                  <Link className="contact" to="/contact" title="Contact">Contact Me</Link>
                 </li>
 
                 { /* TODO::  Login/Login logic */ }

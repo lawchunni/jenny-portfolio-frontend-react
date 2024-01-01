@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import Portfolio from './pages/Portfolio';
+import Contact from './pages/Contact';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import PortfolioDetails from './pages/PortfolioDetails';
 
@@ -22,6 +23,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/portfolio" element={<Portfolio /> } />
             <Route path="/portfolio-details/:id" element={<PortfolioDetails />} />
+            <Route path="/contact" element={<Contact /> } />
           </Routes>
         </Router>
         <Footer />
