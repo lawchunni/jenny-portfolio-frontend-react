@@ -1,7 +1,24 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import logo from '../assets/images/logo.svg';
+import { useEffect, useState } from 'react';
 
 function Header() {
+
+  const [ path, setPath ] = useState('');
+
+  const location = useLocation();
+  const pathName = location?.pathname;
+  const active = 'active';
+  
+  useEffect(() => {
+    
+    if (pathName) {
+      const activePath = pathName === '/' ? 'home' : pathName.replace(/\//g, '');
+      setPath(activePath);
+    }
+    
+  }, [location]);
+
   return (
     <>
       { /*Navigation menu with logo */ }
@@ -26,13 +43,13 @@ function Header() {
               { /*nav menu list: desktop only */ }
               <ul> 
                 <li>
-                  <Link className="home" to="/" title="Home">Home</Link>
+                  <Link className={`home ${path === 'home' ? active : ''}`} to="/" title="Home">Home</Link>
                 </li>
                 <li>
-                  <Link className="portfolio" to="portfolio" title="Portfolio">Portfolio</Link>
+                  <Link className={`portfolio ${path === 'portfolio' ? active : ''}`} to="portfolio" title="Portfolio">Portfolio</Link>
                 </li>
                 <li>
-                  <Link className="contact" to="/contact" title="Contact">Contact Me</Link>
+                  <Link className={`contact ${path === 'contact' ? active : ''}`} to="/contact" title="Contact">Contact Me</Link>
                 </li>
 
                 { /* TODO::  Login/Login logic */ }
@@ -44,7 +61,7 @@ function Header() {
                 </li>
                 { /* TODO::  if admin ----->>>> show admin */ }
                 <li>
-                  <Link to="/admin" title="Dashboard">Admin</Link>
+                  <Link className={path === 'admin' ? active : ''} to="/admin" title="Dashboard">Admin</Link>
                 </li>
                 
               </ul>
