@@ -1,37 +1,53 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function Portfolio() {
 
-  let portfolio = [
-    {
-      id: 1,
-      title: 'Work 1',
-      description: 'Lorem ipsum dolor sit amet, consectetur adip.',
-      img: 'UX-Mockup.png',
-      tech: 'javascript|CSS|PHP|Git|Cloud'
-    },
-    {
-      id: 2,
-      title: 'Work 2',
-      description: 'Lorem ipsum dolor sit amet, consectetur adip.',
-      img: 'portfolio-01-thumbnail.jpg',
-      tech: 'javascript|CSS|PHP|Git|Cloud'
-    },
-    {
-      id: 3,
-      title: 'Work 3',
-      description: 'Lorem ipsum dolor sit amet, consectetur adip.',
-      img: 'portfolio-01-thumbnail.jpg',
-      tech: 'javascript|CSS|PHP|Git|Cloud'
-    },
-    {
-      id: 4,
-      title: 'Work 3',
-      description: 'Lorem ipsum dolor sit amet, consectetur adip.',
-      img: 'Launch-Website.png',
-      tech: 'javascript|CSS|PHP|Git|Cloud'
+  const [records, setRecords] = useState([]);
+
+  useEffect(() => {
+    async function getRecords() {
+      const res = await fetch('http://127.0.0.1:4000/portfolio');
+
+      if (!res.ok) {
+        const msg = `An error occurred: ${res.statusText}`;
+        window.alert(msg);
+        return;
+      }
+
+      const records = await res.json();
+      setRecords(records);
     }
-  ]
+
+    getRecords();
+    return;
+
+  }, [records.length]);
+
+  function recordList() {
+    return records.map((record, index) => {
+      return (
+        <div key={index} className="item">
+          <h2>{ record.title }</h2>
+          <div className="thumbnail" style={{backgroundImage: `url(${require('../assets/images/' + record.thumbnail)})` }}>
+            <Link to={`/portfolio-details/${record._id}`}></Link>
+            <span className="view">View</span>
+            <span className="cover"></span>
+            
+          </div>
+          <h3>Desc:</h3>
+          <p className="desc">{ record.desc_short }</p>
+          <div className="tag">
+            {
+              record.tags.map((tagItem, tagIdx) => (
+                <span key={tagIdx}>{tagItem}</span>
+              ))
+            }
+          </div>
+        </div>
+      )
+    })
+  }
 
   return (
     <>
@@ -40,29 +56,7 @@ function Portfolio() {
           <h1>Portfolio</h1>
 
           <div className="content">
-            {
-              portfolio.map((item, idx) => (
-                <div key={idx} className="item">
-                  <h2>{ item.title }</h2>
-                  <div className="thumbnail" style={{backgroundImage: `url(${require('../assets/images/' + item.img)})` }}>
-                    <Link to={`/portfolio-details/${item.id}`}></Link>
-                    <span className="view">View</span>
-                    <span className="cover"></span>
-                    
-                  </div>
-                  <h3>Desc:</h3>
-                  <p className="desc">{ item.description }</p>
-                  <div className="tag">
-                    {
-                      item.tech.split('|').map((tagItem, tagIdx) => (
-                        <span key={tagIdx}>{tagItem}</span>
-                      ))
-                    }
-                  </div>
-                </div>
-              ))
-            }
-              
+            { recordList()}
           </div>
         </div>
         
