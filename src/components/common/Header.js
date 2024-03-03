@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import logo from '../assets/images/logo.svg';
+import logo from '../../assets/images/logo.svg';
 import { useEffect, useState } from 'react';
 
 function Header() {
@@ -11,13 +11,13 @@ function Header() {
   const active = 'active';
   
   useEffect(() => {
-    
+    console.log(pathName)
     if (pathName) {
       const activePath = pathName === '/' ? 'home' : pathName.replace(/\//g, '');
       setPath(activePath);
     }
     
-  }, [location]);
+  }, [pathName]);
 
   return (
     <>

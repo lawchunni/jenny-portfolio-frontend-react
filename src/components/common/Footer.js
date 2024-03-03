@@ -1,5 +1,5 @@
-import linkedin from '../assets/images/icon-linkedin.svg';
-import whatsapp from '../assets/images/icon-whatsapp.svg';
+import linkedin from '../../assets/images/icon-linkedin.svg';
+import whatsapp from '../../assets/images/icon-whatsapp.svg';
 
 function Footer() {
 

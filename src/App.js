@@ -1,13 +1,12 @@
 import { useEffect } from 'react';
 import './assets/styles/main.scss';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import Header from './components/common/Header';
+import Footer from './components/common/Footer';
 import Home from './pages/Home';
 import Portfolio from './pages/Portfolio';
 import Contact from './pages/Contact';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import PortfolioDetails from './pages/PortfolioDetails';
-
 
 function App() {
   useEffect(() => {

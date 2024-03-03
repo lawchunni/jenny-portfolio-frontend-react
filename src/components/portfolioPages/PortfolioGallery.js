@@ -6,9 +6,9 @@ function PortfolioGallery () {
   
   const { data, loading, error } = useContext(PortfolioContext);
 
-  if(loading) return (<><dic>Loading</dic></>);
+  if(loading) return (<><div>Loading</div></>);
 
-  if(error) return (<><dic>Error</dic></>);
+  if(error) return (<><div>Error</div></>);
 
   return (
     <>
