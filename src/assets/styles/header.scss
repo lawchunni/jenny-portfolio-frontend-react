@@ -86,7 +86,7 @@ header {
 
         a {
           text-decoration: none;
-          color: #1e1e1e;
+          color: $text-color-dark;
           font-size: 18px;
           font-weight: 300;
           position: relative;
@@ -117,7 +117,7 @@ header {
             content: '';
             position: absolute;
             display: block;
-            border-bottom: 5px solid #fdda2c;
+            border-bottom: 5px solid $secondary-color;
             width: calc(100% - 18px);
             bottom: 5px;
             left: 8px;
@@ -152,7 +152,7 @@ header {
         }
 
         span{
-          background-color: #1e1e1e;
+          background-color: $text-color-dark;
           height: 3px;
           display: block;
           margin: 6px 7px 7px 7px;
@@ -188,7 +188,7 @@ header {
 
   .register_btn,
   .profile_btn {
-    background-color: #4969b8;
+    background-color: $main-color;
     color: #fff;
     border-radius: 10px;
     padding: 5px 15px;
@@ -209,7 +209,7 @@ header {
   }
 
   .login_btn {
-    color: #4969b8;
+    color: $main-color;
     font-weight: 500;
 
     &:hover {

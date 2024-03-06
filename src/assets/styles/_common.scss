@@ -1,0 +1,20 @@
+$main-color: #4969B8;
+$secondary-color: #fdda2c;
+$text-color-dark: #1e1e1e;
+
+.portfolio_tag {
+  font-size: 11px;
+  color: #000;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  line-height: 18px;
+  span {
+    position: relative;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    background-color: #fff;
+    border-radius: 7px;
+    padding: 0 10px;
+  }
+}

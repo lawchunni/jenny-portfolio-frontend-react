@@ -1,8 +1,6 @@
 @import '_mixin';
 @import '_animation';
-
-$main-color: #4969B8;
-$secondary-color: #fdda2c;
+@import '_common';
 
 /* General styles */
 * {
@@ -16,7 +14,7 @@ body {
   font-weight: 400;
   line-height: 1.4em;
   font-size: 16px;
-  color: #1e1e1e;
+  color: $text-color-dark;
   overflow-x: hidden;
 }
 
@@ -61,7 +59,7 @@ p {
 }
 
 a {
-  color: #fdda2c;
+  color: $secondary-color;
   text-decoration: none;
 }
 
@@ -101,14 +99,14 @@ table {
 }
 
 th {
-  background-color: #fdda2c;
-  border: 2px solid #fdda2c;
+  background-color: $secondary-color;
+  border: 2px solid $secondary-color;
   color: #494949;
   padding: 10px;
 }
 
 form label a {
-  color: #fdda2c;
+  color: $secondary-color;
   font-family: 'courier new', courier, serif;
   font-weight: 700;
 }
@@ -133,7 +131,7 @@ form label a {
 
 .action_btn {
   .add_btn, .del_btn, .pay_btn {
-    background-color: #4969b8;
+    background-color: $main-color;
     color: #fff;
     padding: 16px 24px;
     border-radius: 50px;
@@ -157,8 +155,8 @@ form label a {
   @include transition(all .3s ease-in-out);
 
   &:hover {
-    border: 2px solid #fdda2c;
-    background: #fdda2c;
+    border: 2px solid $secondary-color;
+    background: $secondary-color;
     color: #000;
   }
 }
@@ -223,7 +221,7 @@ form label a {
 }
 
 section {
-  background-color: #4969b8;
+  background-color: $main-color;
   min-height: 500px;
 
   @media screen and (max-width: 767px) {
@@ -276,7 +274,7 @@ section {
 //   .flash {
 //     text-align: center;
 //     padding: 10px 0;
-//     color: #1e1e1e;
+//     color: $text-color-dark;
 //     font-weight: 400;
 //   }
 
@@ -312,7 +310,7 @@ section {
 //   position: absolute;
 //   right: -4px;
 //   top: 0;
-//   color: #fdda2c;
+//   color: $secondary-color;
 //   font-size: 16px;
 //   font-weight: bold;
 // }
@@ -334,7 +332,7 @@ section {
 // }
 
 // .submit_form .highlight {
-//   color: #fdda2c;
+//   color: $secondary-color;
 //   font-weight: bold;
 //   padding-bottom: 20px;
 // }
@@ -391,7 +389,7 @@ section {
 //   height: 100%;
 //   height: 100vh;
 //   width: 20%;
-//   background-color: #4969b8;
+//   background-color: $main-color;
 // }
 
 // #admin header .wrapper {
@@ -431,7 +429,7 @@ section {
 
 // #admin header nav ul li a::after {
 //   left: 0;
-//   border-bottom: 3px solid #fdda2c;
+//   border-bottom: 3px solid $secondary-color;
 //   width: 100%;
 // }
 
@@ -484,7 +482,7 @@ section {
 // }
 
 // #admin footer  a {
-//   color: #4969b8;
+//   color: $main-color;
 // }
 
 // /* =============== Admin - Dashboard =============== */
@@ -496,7 +494,7 @@ section {
 
 // #admin #admin_dashboard .row .col h4 {
 //   border-bottom: 1px solid #000;
-//   color: #4969b8;
+//   color: $main-color;
 // }
 
 // #admin #admin_dashboard .row .col .container {
@@ -546,7 +544,7 @@ section {
 // }
 
 // #admin .view_list .row a {
-//   color: #4969b8;
+//   color: $main-color;
 //   margin-bottom: 5px;
 // }
 
@@ -560,7 +558,7 @@ section {
 // }
 
 // #admin .view_list .row form .btn.activate_btn {
-//   color: #4969b8;
+//   color: $main-color;
 // }
 
 // #admin .search_results {
@@ -569,7 +567,7 @@ section {
 
 // #admin .search_results span,
 // #admin p.no_result span {
-//   color: #4969b8;
+//   color: $main-color;
 // }
 
 // #admin p.no_result {

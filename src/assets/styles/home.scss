@@ -8,7 +8,7 @@
 /* Banner Styles */
 #banner {
   position: relative;
-  background-color: #fdda2c;
+  background-color: $secondary-color;
 
   .wrapper {
     min-height: 450px;
@@ -75,7 +75,7 @@
     p {
       background-color: #000;
       display: inline-block;
-      color: #fdda2c;
+      color: $secondary-color;
       line-height: 1.2em;
       padding: 5px 15px;
       margin-top: 0;
@@ -152,7 +152,7 @@
     bottom: -90px;
 
     path {
-      fill: #4969b8!important;
+      fill: $main-color!important;
     }
   }
 }
@@ -243,7 +243,7 @@
         height: 2px;
         left: 0;
         bottom: -10px;
-        background-color: #fdda2c;
+        background-color: $secondary-color;
       }
     }
   }
@@ -259,7 +259,7 @@
         display: block;
         max-width: 220px;
         text-align: center;
-        background-color: #fdda2c;
+        background-color: $secondary-color;
         margin: 0 auto;
         padding: 12px 30px;
         border-radius: 20px;
@@ -267,13 +267,13 @@
         text-decoration: none;
         font-size: 18px;
         box-shadow: 2px 2px 10px rgba(0,0,0,.2);
-        border: 1px solid #fdda2c;
+        border: 1px solid $secondary-color;
         @include transition(all .3s);
 
         &:hover {
-          background-color: #4969b8;
-          border: 1px solid #fdda2c;
-          color: #fdda2c;
+          background-color: $main-color;
+          border: 1px solid $secondary-color;
+          color: $secondary-color;
           @include transform(all scale(1.1));
           text-shadow: 2px 2px 10px rgba(0,0,0,.2);
         }
@@ -344,13 +344,13 @@
     width: 100%;
     height: 10px;
     background-color: #fff;
-    border: 1px solid #fdda2c;
+    border: 1px solid $secondary-color;
     border-radius: 5px;
 
     .percentage {
       display: block;
       height: 100%;
-      background-color: #fdda2c;
+      background-color: $secondary-color;
       border-radius: 5px;
       @include animation(progress 1500ms ease-in 1);
 
@@ -382,7 +382,7 @@
   .languages {
     font-family: 'Kanit', sans-serif;
     font-weight: 500;
-    color: #4969b8;
+    color: $main-color;
     position: absolute;
     left: calc(40% + 80px);
     top: 50%;
