@@ -113,11 +113,14 @@ form label a {
   font-weight: 700;
 }
 
-.error {
-  color: #ffbcb3;
-  font-weight: 700;
+.message {
+  text-align: center;
 
-  ul li {
+  &.loading {
+    color: #fff;
+  }
+
+  &.error {
     color: #ffbcb3;
     font-weight: 700;
   }
