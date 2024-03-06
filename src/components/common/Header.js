@@ -11,7 +11,6 @@ function Header() {
   const active = 'active';
   
   useEffect(() => {
-    console.log(pathName)
     if (pathName) {
       const activePath = pathName === '/' ? 'home' : pathName.replace(/\//g, '');
       setPath(activePath);

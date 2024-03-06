@@ -1,14 +1,16 @@
 import { useContext } from "react";
 import { PortfolioContext } from "../../contexts/PortfolioContext";
-import PortfolioItem from "./PortfolioItem";
+import PortfolioItems from "./PortfolioItems";
+import Loading from "../common/Loading";
+import Error from "../common/Error";
 
 function PortfolioGallery () {
   
   const { data, loading, error } = useContext(PortfolioContext);
 
-  if(loading) return (<><div>Loading</div></>);
+  if(loading) return (<><Loading /></>);
 
-  if(error) return (<><div>Error</div></>);
+  if(error) return (<><Error /></>);
 
   return (
     <>
@@ -17,7 +19,7 @@ function PortfolioGallery () {
           <h1>Portfolio</h1>
 
           <div className="content">
-            <PortfolioItem items={data} />
+            <PortfolioItems items={data} />
           </div>
         </div>
       </section>

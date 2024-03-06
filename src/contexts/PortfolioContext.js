@@ -1,5 +1,5 @@
 import { useEffect, useState, createContext } from "react";
-import { fetchDataFromAPI } from "../services/portfolioApi";
+import { fetchPortfolioFromAPI } from "../services/portfolioApi";
 
 const PortfolioContext = createContext();
 
@@ -14,8 +14,7 @@ const PortfolioContextProvider = ({ children }) => {
 
   const fetchData = async () => {
     try {
-      const fetchedData = await fetchDataFromAPI();
-      console.log(fetchedData)
+      const fetchedData = await fetchPortfolioFromAPI();
       setData(fetchedData);
       setLoading(false);
     } catch (err) {
