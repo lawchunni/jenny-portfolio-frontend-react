@@ -12,7 +12,7 @@ function PortfolioItems ({items}) {
         </div>
         <h3>Desc:</h3>
         <p className="desc">{ item.desc_short }</p>
-        <div className="tag">
+        <div className="portfolio_tag">
           {
             item.tags.map((tagItem, tagIdx) => (
               <span key={tagIdx}>{tagItem}</span>
