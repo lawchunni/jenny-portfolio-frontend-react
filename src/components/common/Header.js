@@ -1,5 +1,4 @@
 import { Link, useLocation } from 'react-router-dom';
-import logo from '../../assets/images/logo.svg';
 import { useEffect, useState } from 'react';
 
 function Header() {
@@ -27,13 +26,13 @@ function Header() {
             { /*Logo */ }
             <div id="logo">
               <a href="/" title="Home">
-                <img src={ logo } alt="logo" width={116} height={42} />
+                <img src="/images/logo.svg" alt="logo" width="116" height="42" />
               </a>
             </div>
             { /*Navigation menu */ }
             <nav>
               { /*hamburger icon: mobile only */ }
-              <a href="#" id="hamburger" title="hamburger icon">
+              <a href=":javascript;" id="hamburger" title="hamburger icon">
                 <span></span>
                 <span></span>
                 <span></span>
