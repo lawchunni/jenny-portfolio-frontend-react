@@ -4,10 +4,12 @@
     display: flex;
     flex-direction: row-reverse;
     flex-wrap: nowrap;
+    padding-bottom: 40px;
 
     @media screen and (max-width: 767px) {
       display: block;
     }
+
     .thumbnails {
       width: 60%;
       margin-right: 40px;
@@ -16,11 +18,34 @@
         width: 100%;
       }
 
+      .react-multi-carousel-list {
+        .item {
+          margin: 0 70px;
+        }
+        .portfolio-dot-list-style {
+          button {
+            border-color: #fff;
+            margin-right: 16px;
+          }
+          .react-multi-carousel-dot {
+            button {
+              background: $main-color;
+            }
+            &.react-multi-carousel-dot--active {
+              button {
+                background: #fff;
+              }
+            }
+          }
+        }
+      }
+      
       img {
         width: 100%;
         margin-bottom: 20px;
       }
     }
+
     .desc {
       width: 40%;
       color: #fff;

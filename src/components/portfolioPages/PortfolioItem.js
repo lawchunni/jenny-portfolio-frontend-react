@@ -2,9 +2,26 @@ import { useContext, useEffect } from "react";
 import { SelectedPortfolioContext } from "../../contexts/SelectedPortfolioContext";
 import Loading from "../common/Loading";
 import Error from "../common/Error";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 function PortfolioItem ({id}) {
   const { data, loading, error, updateId } = useContext(SelectedPortfolioContext);
+
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 1
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 1
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1
+    }
+  }
 
   useEffect(() => {
     if (id) {
@@ -30,13 +47,23 @@ function PortfolioItem ({id}) {
         </div>
         
         <div className="thumbnails">
-          {
-            data.images.map((item, index) => {
-              return (
-                <img key={index} src={ require(`../../assets/images/${item}`)} alt="img desc" />
-              )
-            })
-          }
+          <Carousel 
+            responsive={responsive}
+            draggable={false}
+            showDots={true}
+            infinite={true}
+            dotListClass="portfolio-dot-list-style"
+          >
+            {
+              data.images.map((item, index) => {
+                return (
+                  <div className="item">
+                    <img key={index} src={ require(`../../assets/images/${item}`)} alt="img desc" />
+                  </div>
+                )
+              })
+            }
+          </Carousel>
         </div>
         
       </div>
