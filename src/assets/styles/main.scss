@@ -220,6 +220,16 @@ form label a {
   }
 }
 
+.flex {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  .item {
+    width: calc(100% / 12 * 4 - 8px);
+  }
+}
+
 section {
   background-color: $main-color;
   min-height: 500px;

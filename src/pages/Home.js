@@ -1,27 +1,9 @@
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { PortfolioContext, PortfolioContextProvider } from '../contexts/PortfolioContext';
+import PortfolioHighlights from '../components/home/PortfolioHighlights';
 
 function Home() {
-
-  let portfolio = [
-    {
-      title: 'Work 1',
-      description: 'Lorem ipsum dolor sit amet, consectetur adip.',
-      img: 'UX-Mockup.png',
-      imgdesc: 'img desc'
-    },
-    {
-      title: 'Work 2',
-      description: 'Lorem ipsum dolor sit amet, consectetur adip.',
-      img: 'Coding.png',
-      imgdesc: 'img desc'
-    },
-    {
-      title: 'Work 3',
-      description: 'Lorem ipsum dolor sit amet, consectetur adip.',
-      img: 'Launch-Website.png',
-      imgdesc: 'img desc'
-    }
-  ]
 
   return (
     <div>
@@ -67,21 +49,9 @@ function Home() {
           <div className="wrapper">
             <h2>&lt;h2&gt;Portfolio Highlight&lt;/h2&gt;</h2>
 
-            {
-              portfolio.map((item, idx) => (
-                <div key={idx} className="col col-4 item">
-                  <div className="circle_icon">
-                    <span className="circle"></span>
-                    <img className="work-icon" src={ require('../assets/images/' + item.img) } alt={ item.imgdesc } width={145} height={93} />
-                    <img className="shadow" src={ require('../assets/images/blurry-shadow.png') } alt="blurry shadow" width={60} height={24} />
-                  </div>
-                  <div className="info">
-                    <div className="title">{ item.title }</div>
-                    <p>{ item.description }</p>
-                  </div>
-                </div>
-              ))
-            }
+            <PortfolioContextProvider>
+              <PortfolioHighlights />
+            </PortfolioContextProvider>
 
             <div className="call_to_action">
               <div className="button">

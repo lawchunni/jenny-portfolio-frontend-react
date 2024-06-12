@@ -91,7 +91,7 @@
     max-width: 1200px;
     position: absolute;
     right: -90px;
-    bottom: -117px;
+    bottom: -90px;
     @include animation(fadein 3s ease);
 
     @media screen and (max-width: 767px) {
@@ -111,7 +111,7 @@
     max-width: 350px;
     position: absolute;
     right: 0;
-    bottom: -130px;
+    bottom: -80px;
     -webkit-transform-origin: bottom;
     transform-origin: bottom;
     -webkit-transform-style: preserve-3d;
@@ -192,6 +192,7 @@
       left: 0;
       top: 0;
       border-radius: 50%;
+      cursor: pointer;
       @include transition(all .3s);
     }
 
