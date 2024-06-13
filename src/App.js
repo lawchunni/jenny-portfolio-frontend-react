@@ -7,6 +7,7 @@ import Portfolio from './pages/Portfolio';
 import Contact from './pages/Contact';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import PortfolioDetails from './pages/PortfolioDetails';
+import ScrollToTop from './components/common/ScrollToTop';
 
 function App() {
   useEffect(() => {
@@ -17,6 +18,7 @@ function App() {
     <>
       <div className="App">
         <Router>
+          <ScrollToTop />
           <Header />
           <Routes>
             <Route path="/" element={<Home />} />
