@@ -1,7 +1,5 @@
 import { useEffect } from 'react';
 import './assets/styles/main.scss';
-import Header from './components/common/Header';
-import Footer from './components/common/Footer';
 import Home from './pages/Home';
 import Portfolio from './pages/Portfolio';
 // import Contact from './pages/Contact';
@@ -9,6 +7,9 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import PortfolioDetails from './pages/PortfolioDetails';
 import ScrollToTop from './components/common/ScrollToTop';
 import PageNotFound from './pages/PageNotFound';
+import Login from './pages/Login';
+import CommonLayout from './layouts/CommonLayout';
+import AdminLayout from './layouts/AdminLayout';
 
 function App() {
   useEffect(() => {
@@ -20,16 +21,19 @@ function App() {
       <div className="App">
         <Router>
           <ScrollToTop />
-          <Header />
+          
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/portfolio" element={<Portfolio /> } />
-            <Route path="/portfolio-details/:id" element={<PortfolioDetails />} />
+            {/* Common */}
+            <Route path="/" element={<CommonLayout><Home /></CommonLayout>} />
+            <Route path="/portfolio" element={<CommonLayout><Portfolio /></CommonLayout> } />
+            <Route path="/portfolio-details/:id" element={<CommonLayout><PortfolioDetails /></CommonLayout>} />
             {/* <Route path="/contact" element={<Contact /> } /> */}
-            <Route path="*" element={<PageNotFound />} />
+            <Route path="/login" element={<CommonLayout><Login /></CommonLayout>} />
+            <Route path="*" element={<CommonLayout><PageNotFound /></CommonLayout>} />
+            
           </Routes>
         </Router>
-        <Footer />
+       
       </div>
     </>
   );
