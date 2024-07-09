@@ -301,51 +301,54 @@ section {
 @import 'portfolio';
 @import 'portfoliodetails';
 @import 'contact';
+@import 'login';
+@import 'admin';
 @import 'header';
 @import 'footer';
 
 /* =============== Register page================
                   Login page
 ============================================== */
-// .submit_form p {
-//   color: #fff;
-// }
+.submit_form p {
+  color: #fff;
+}
 
-// .submit_form form p {
-//   position: relative;
-// }
+.submit_form form p {
+  position: relative;
+}
 
-// .submit_form form p.required:after {
-//   content: '*';
-//   position: absolute;
-//   right: -4px;
-//   top: 0;
-//   color: $secondary-color;
-//   font-size: 16px;
-//   font-weight: bold;
-// }
+.submit_form form p.required:after {
+  content: '*';
+  position: absolute;
+  right: -4px;
+  top: 0;
+  color: $secondary-color;
+  font-size: 16px;
+  font-weight: bold;
+}
 
-// .submit_form .submit_button {
-//   width: 200px;
-//   display: block;
-//   margin: 0 auto;
-// }
+.submit_form .submit_button {
+  width: 200px;
+  display: block;
+  margin: 0 auto;
+  cursor: pointer;
+}
 
-// .submit_form input:not([type=checkbox]) {
-//   background: #fff;
-//   border: none;
-//   border-bottom: 2px solid rgba(255,255,255,.7);
-//   padding: 16px 10px;
-//   width: calc(100% - 10px);
-//   font-size: 16px;
-//   @include transition(all .3s ease-in-out);
-// }
+.submit_form input:not([type=checkbox]) {
+  background: #fff;
+  border: none;
+  border-bottom: 2px solid rgba(255,255,255,.7);
+  padding: 16px 10px;
+  width: calc(100% - 10px);
+  font-size: 16px;
+  @include transition(all .3s ease-in-out);
+}
 
-// .submit_form .highlight {
-//   color: $secondary-color;
-//   font-weight: bold;
-//   padding-bottom: 20px;
-// }
+.submit_form .highlight {
+  color: $secondary-color;
+  font-weight: bold;
+  padding-bottom: 20px;
+}
 
 // /* =============== Register page =============== */
 // #register .content {
@@ -366,301 +369,3 @@ section {
 //   display: block;
 // }
 
-// /* =============== Login =============== */
-// #login .content {
-//   max-width: 70%;
-//   margin: 0 auto;
-//   max-width: 320px;
-// }
-
-// #login form .field {
-//   margin-bottom: 35px;
-// }
-
-// .submit_button, .forget_password {
-//   margin-top: 30px;
-// }
-
-// /* =============== Error 404 =============== */
-// #error404 h1 {
-//   color: #fff;
-//   text-align: center;
-//   margin-top: 200px;
-// }
-
-// /* =============== Admin =============== */
-// #admin .flash_container {
-//   position: fixed;
-//   top: 0;
-//   z-index: 99;
-// }
-
-// #admin header {
-//   height: 100%;
-//   height: 100vh;
-//   width: 20%;
-//   background-color: $main-color;
-// }
-
-// #admin header .wrapper {
-//   position: absolute;
-//   right: 0;
-//   top: 0;
-//   width: 100%;
-//   max-width: 200px;
-//   height: 100%;
-// }
-
-// #admin header #logo {
-//   position: relative;
-//   left: auto;
-//   top: auto;
-//   width: 100%;
-//   max-width: 116px;
-//   margin-top: 40px;
-// }
-
-// #admin header nav {
-//   display: block;
-//   margin: 20px 0 0 0;
-//   border-bottom: 1px solid #fff;
-//   padding-bottom: 20px;
-// }
-
-// #admin header nav ul li {
-//   display: block;
-// }
-
-// #admin header nav ul li a {
-//   display: block;
-//   color: #fff;
-//   padding: 10px 0;;
-// }
-
-// #admin header nav ul li a::after {
-//   left: 0;
-//   border-bottom: 3px solid $secondary-color;
-//   width: 100%;
-// }
-
-// #admin header .logout_btn {
-//   color: #fff;
-//   padding: 20px 0 0 0;
-// }
-
-// #admin header .static_site {
-//   margin-top: 20px;
-// }
-
-// #admin #searchbox {
-//   position: absolute;
-//   right: 0;
-//   top: 0;
-// }
-
-// #admin .action_btn {
-//   margin-bottom: 40px;
-// }
-
-// #admin section,
-// #admin footer {
-//   display: inline-block;
-//   width: 67%;
-//   width: calc(80% - 2px);
-//   background-color: #f5f5f5;
-//   margin: 0 0 0 20%;
-// }
-
-// #admin section.section_white h1 {
-//   margin-top: 0;
-// }
-
-// #admin section .wrapper {
-//   margin: 60px 40px 40px 40px;
-//   padding: 0;
-//   max-width: 100%;
-// }
-
-// #admin section .wrapper .content {
-//   padding: 0;
-//   background-color: #f5f5f5;
-// }
-
-// #admin footer .wrapper {
-//   padding-left: 40px;
-//   text-align: center;
-// }
-
-// #admin footer  a {
-//   color: $main-color;
-// }
-
-// /* =============== Admin - Dashboard =============== */
-// #admin #admin_dashboard .row .col {
-//   background-color: #fff;
-//   padding: 0 20px;
-//   box-shadow: 5px 5px 10px rgba(0,0,0,.1);
-// }
-
-// #admin #admin_dashboard .row .col h4 {
-//   border-bottom: 1px solid #000;
-//   color: $main-color;
-// }
-
-// #admin #admin_dashboard .row .col .container {
-//   font-weight: 400;
-// }
-// /* =============== Admin - List View =============== */
-
-// #admin .view_list .row {
-//   background-color: #fff;
-//   margin-bottom: 10px;
-//   box-shadow: 5px 5px 10px rgba(0,0,0,.1);
-//   display: flex;
-//   flex-direction: row;
-//   flex-wrap: nowrap;
-//   justify-content: center;
-// }
-
-// #admin .view_list .row.deleted {
-//   background-color: unset;
-//   box-shadow: none;
-// }
-
-// #admin .view_list .row.header {
-//   font-weight: 700;
-// }
-
-// #admin .view_list .row .col {
-//   padding: 15px 5px;
-//   position: relative;
-//   flex-shrink: 0;
-//   text-align: center;
-//   word-wrap: break-word;
-// }
-
-// #admin .view_list .row .col:not(:last-child):after {
-//   content: '';
-//   position: absolute;
-//   height: 80%;
-//   width: 1px;
-//   top: 10%;
-//   right: -0;
-//   background-color: #f5f5f5;
-// }
-
-// #admin .view_list .row .col.id {
-//   width: 40px;
-// }
-
-// #admin .view_list .row a {
-//   color: $main-color;
-//   margin-bottom: 5px;
-// }
-
-// #admin .view_list .row form .btn {
-//   color: #e66453;
-//   border: none;
-//   background-color: unset;
-//   cursor: pointer;
-//   font-family: 'Kanit', sans-serif;
-//   font-weight: 400;
-// }
-
-// #admin .view_list .row form .btn.activate_btn {
-//   color: $main-color;
-// }
-
-// #admin .search_results {
-//   margin-bottom: 50px;
-// }
-
-// #admin .search_results span,
-// #admin p.no_result span {
-//   color: $main-color;
-// }
-
-// #admin p.no_result {
-//   margin-top: 60px;
-//   text-align: center;
-//   font-weight: 700;
-// }
-
-// /* =============== Admin - Form =============== */
-
-// #admin .admin_form {
-//   background-color: #fff;
-//   padding: 10px 20px;
-//   box-shadow: 5px 5px 10px rgba(0,0,0,.1);
-//   font-family: 'Kanit', sans-serif;
-// }
-
-// #admin .admin_form form label {
-//   vertical-align: top;
-//   margin-right: 16px;
-//   width: 160px;
-//   display: inline-block;
-//   color: #4a4a4a;
-//   text-align: right;
-//   padding: 10px 5px;
-// }
-
-// #admin .admin_form form label[for=no],
-// #admin .admin_form form label[for=yes] {
-//   width: auto;
-// }
-
-// #admin .admin_form form input[type=radio] {
-//   margin: 15px 2px;
-// }
-
-// #admin .admin_form form input[type=text],
-// #admin .admin_form form textarea {
-//   font-size: 16px;
-//   padding: 10px 5px;
-//   width: calc(100% - 205px);
-//   border: 1px solid #b8b8b8;
-//   outline: none;
-// }
-
-// #admin .admin_form form input[type=file],
-// #admin .admin_form form select {
-//   padding: 10px 5px;
-// }
-
-// #admin .admin_form form .upload_img input {
-//   vertical-align: top;
-// }
-
-// #admin .admin_form form .upload_img img{
-//   width: 100px;
-//   height: auto;
-// }
-
-// #admin .admin_form form select {
-//   border: 1px solid #b8b8b8;
-// }
-
-// #admin .admin_form form .reminder, 
-// #admin .admin_form form .error {
-//   margin-left: 185px;
-// }
-
-// #admin .admin_form form .reminder {
-//   font-size: 14px;
-//   color: #8990ad;
-// }
-
-// #admin .admin_form form .error {
-//   display: block;
-//   font-weight: 400;
-// }
-
-// #admin .admin_form form {
-//   color:rgba(0, 0, 0, 0.7);
-// }
-
-// #admin .admin_form .action_btn {
-//   text-align: center;
-//   margin-top: 40px;
-// }

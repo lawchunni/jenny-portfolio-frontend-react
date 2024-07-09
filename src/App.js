@@ -10,6 +10,8 @@ import PageNotFound from './pages/PageNotFound';
 import Login from './pages/Login';
 import CommonLayout from './layouts/CommonLayout';
 import AdminLayout from './layouts/AdminLayout';
+import UserList from './pages/admin/UserList';
+import UserCreate from './pages/admin/UserCreate';
 
 function App() {
   useEffect(() => {
@@ -31,6 +33,9 @@ function App() {
             <Route path="/login" element={<CommonLayout><Login /></CommonLayout>} />
             <Route path="*" element={<CommonLayout><PageNotFound /></CommonLayout>} />
             
+            {/* Admin */}
+            <Route path="/admin/user-list" element={<AdminLayout><UserList /></AdminLayout>} />
+            <Route path="/admin/user-create" element={<AdminLayout><UserCreate /></AdminLayout>} />
           </Routes>
         </Router>
        
