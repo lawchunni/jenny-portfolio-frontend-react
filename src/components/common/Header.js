@@ -1,21 +1,34 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useAuth } from '../../contexts/AuthContext';
+import LogoutBtn from './LogoutBtn';
+
+// Header Items
+function Item({name, path, route, extraClassName = '', display = true}) {
+  const displayName = name.charAt(0).toUpperCase() + name.slice(1);
+
+  if (display) {
+    return (
+      <li>
+        <Link className={`${ name } ${extraClassName} ${ path === name ? 'active' : ''}`} to={ route } title={ name }>{ displayName }</Link>
+      </li>
+    )
+  }
+}
 
 function Header() {
-
   const [ path, setPath ] = useState('');
-
   const location = useLocation();
-  const pathName = location?.pathname;
-  const active = 'active';
-  
+  const getPath = location?.pathname;
+  const { auth } = useAuth(); 
+
   useEffect(() => {
-    if (pathName) {
-      const activePath = pathName === '/' ? 'home' : pathName.replace(/\//g, '');
+    if (getPath) {
+      const activePath = getPath === '/' ? 'home' : getPath.replace(/\//g, '');
+
       setPath(activePath);
     }
-    
-  }, [pathName]);
+  }, [getPath]);
 
   return (
     <>
@@ -29,9 +42,10 @@ function Header() {
                 <img src="/images/logo.svg" alt="logo" width="116" height="42" />
               </a>
             </div>
+
             { /*Navigation menu */ }
             <nav>
-              { /*hamburger icon: mobile only */ }
+              { /*hamburger icon: (mobile only) */ }
               <a href=":javascript;" id="hamburger" title="hamburger icon">
                 <span></span>
                 <span></span>
@@ -40,31 +54,21 @@ function Header() {
 
               { /*nav menu list: desktop only */ }
               <ul> 
+
+                <Item name="home" path={path} route="/" />
+
+                <Item name="portfolio" path={path} route="/portfolio" />
+
+                <Item name="login" path={path} route="/login" extraClassName="login_btn" display={!auth} />
+
+                <Item name="admin" path={path} route="/admin/portfolio-list" extraClassName="admin_btn" display={auth} />
+
+                 {/* <!-- Logout button --> */}
                 <li>
-                  <Link className={`home ${path === 'home' ? active : ''}`} to="/" title="Home">Home</Link>
-                </li>
-                <li>
-                  <Link className={`portfolio ${path === 'portfolio' ? active : ''}`} to="portfolio" title="Portfolio">Portfolio</Link>
-                </li>
-                <li>
-                  <Link className={`contact ${path === 'contact' ? active : ''}`} to="/contact" title="Contact">Contact Me</Link>
+                  <LogoutBtn display={auth} />
                 </li>
 
-                { /* TODO::  Login/Login logic */ }
-                <li>
-                  <Link className="login_btn" to="/login" title="Login">Login</Link>
-                </li>
-                <li>
-                  <Link to="/logout" title="Dashboard">Logout</Link>
-                </li>
-                { /* TODO::  if admin ----->>>> show admin */ }
-                <li>
-                  <Link className={path === 'admin' ? active : ''} to="/admin" title="Dashboard">Admin</Link>
-                </li>
-                
               </ul>
-
-              { /*Search Box */ }
             </nav>
             
           </div>

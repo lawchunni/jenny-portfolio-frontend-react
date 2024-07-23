@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
+import LogoutBtn from "../common/LogoutBtn";
+import { useAuth } from "../../contexts/AuthContext";
 
 function Sidebar() {
+
+  const { auth } = useAuth();
+
   return (
     <>
       <header>
@@ -34,7 +39,6 @@ function Sidebar() {
 
               <li>
                 <Link to="/admin/traffic" title="Traffic">Traffic</Link>
-
               </li>
 
             </ul>
@@ -45,9 +49,7 @@ function Sidebar() {
           </div>
 
           {/* <!-- Logout button --> */}
-          <form action="/" method="post">
-            <input className="logout_btn" type="submit" name="logout" value="logout" />
-          </form>
+          <LogoutBtn />
             
         </div>
     </header>

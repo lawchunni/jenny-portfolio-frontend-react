@@ -27,7 +27,7 @@
     height: 100vh;
     width: 20%;
     background-color: $main-color;
-
+    
     .wrapper {
       position: absolute;
       right: 0;
@@ -133,6 +133,12 @@
       flex-wrap: nowrap;
       justify-content: center;
 
+      &.header {
+        font-family: courier, serif;
+        font-weight: 600;
+        color: $text-color-dark;
+      }
+
       a {
         color: $main-color;
         margin-bottom: 5px;
@@ -181,9 +187,6 @@
       box-shadow: none;
     }
 
-    &.header {
-      font-weight: 700;
-    }
   }
 
   /* =============== Admin - Form =============== */

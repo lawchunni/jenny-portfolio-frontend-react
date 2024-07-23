@@ -76,7 +76,7 @@ header {
         box-shadow: -1px -2px 16px rgba(0,0,0,.2);
       }
 
-      li{
+      li {
         display: inline-block;
         font-size: 22px;
 
@@ -126,13 +126,14 @@ header {
             -webkit-transform: scaleX(0);
             transform: scaleX(0);
           }
+
+          &.active::after,
+          &:hover:after {
+            -webkit-transform: scaleX(1);
+            transform: scaleX(1);
+          }
         }
 
-        a.active::after,
-        &:hover a::after {
-          -webkit-transform: scaleX(1);
-          transform: scaleX(1);
-        }
       }
     }
 
@@ -187,10 +188,10 @@ header {
   }
 
   .register_btn,
-  .profile_btn {
+  .admin_btn {
     background-color: $main-color;
     color: #fff;
-    border-radius: 10px;
+    border-radius: 15px;
     padding: 5px 15px;
     text-decoration: none;
     transition: all .3s ease-in-out;
@@ -198,6 +199,12 @@ header {
 
     &:hover {
       background-color: #2c447e;
+    }
+
+    &::after {
+      border-bottom: 0px;
+      -webkit-transform: none;
+      transform: none;
     }
   }
 
