@@ -21,7 +21,6 @@ function Login() {
 
       const data = await res.json();
   
-      console.log('login data: ', data);
       if(res.ok) {
         await login(data);
         alert(data.message);

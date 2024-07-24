@@ -91,7 +91,7 @@ header {
           font-weight: 300;
           position: relative;
           box-sizing: border-box;
-          padding: 10px 8px;
+          padding: 10px 12px;
 
           @media screen and (max-width: 870px) {
             padding: 10px;
@@ -192,7 +192,8 @@ header {
     background-color: $main-color;
     color: #fff;
     border-radius: 15px;
-    padding: 5px 15px;
+    padding: 5px 12px;
+    margin-right: 8px;
     text-decoration: none;
     transition: all .3s ease-in-out;
     -webkit-transition: all .3s ease-in-out;

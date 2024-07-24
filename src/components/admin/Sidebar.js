@@ -1,10 +1,26 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import LogoutBtn from "../common/LogoutBtn";
-import { useAuth } from "../../contexts/AuthContext";
+import { useEffect, useState } from "react";
+
+function Item({displayName, path, route}) {
+  return (
+    <Link 
+      className={`${ path === route ? 'active' : ''}`}
+      to={route} 
+      title={displayName}
+    >{displayName}</Link>
+  )
+}
 
 function Sidebar() {
+  const [ path, setPath ] = useState('');
+  const getPath = useLocation().pathname;
 
-  const { auth } = useAuth();
+  useEffect(() => {
+    if(getPath) {
+      setPath(getPath);
+    }
+  }, [getPath]);
 
   return (
     <>
@@ -30,22 +46,22 @@ function Sidebar() {
             {/* <!-- nav menu list: desktop only --> */}
             <ul>
               <li>
-                <Link to="/admin/portfolio-list" title="Portfolio List">Portfolio List</Link>
+                <Item displayName="Portfolio List" path={path} route="/admin/portfolio-list" />
               </li>
 
               <li>
-                <Link to="/admin/user-list" title="User">User</Link>
+                <Item displayName="User" path={path} route="/admin/user-list" />
               </li>
 
               <li>
-                <Link to="/admin/traffic" title="Traffic">Traffic</Link>
+                <Item displayName="Traffic" path={path} route="/admin/traffic" />
               </li>
 
             </ul>
           </nav>
 
           <div className="static_site">
-            <Link to="/" title="Customer Site">Customer Site</Link>
+            <Item displayName="Customer Site" path={path} route="/" />
           </div>
 
           {/* <!-- Logout button --> */}

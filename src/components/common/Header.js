@@ -10,7 +10,11 @@ function Item({name, path, route, extraClassName = '', display = true}) {
   if (display) {
     return (
       <li>
-        <Link className={`${ name } ${extraClassName} ${ path === name ? 'active' : ''}`} to={ route } title={ name }>{ displayName }</Link>
+        <Link 
+          className={`${ name } ${extraClassName} ${ path === name ? 'active' : ''}`} 
+          to={ route } 
+          title={ name }
+        >{ displayName }</Link>
       </li>
     )
   }
