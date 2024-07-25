@@ -1,3 +1,4 @@
+// fetch pofolio list from API
 const fetchPortfolioFromAPI = async () => {
   try {
     const res = await fetch('http://127.0.0.1:4000/portfolio');
@@ -8,6 +9,7 @@ const fetchPortfolioFromAPI = async () => {
   }
 };
 
+// fetch single portfolio item from API
 const fetchSelectedPortfolioFromAPI = async (id) => {
   try {
     const res = await fetch(`http://127.0.0.1:4000/portfolio/${id}`);

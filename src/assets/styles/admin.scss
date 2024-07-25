@@ -124,6 +124,10 @@
 
   /* =============== Admin - List View =============== */
   .view_list {
+
+    font-family: $font-content;
+    font-size: 12px;
+
     .row {
       background-color: #fff;
       margin-bottom: 10px;
@@ -136,12 +140,12 @@
       &.header {
         font-family: courier, serif;
         font-weight: 600;
+        font-size: 14px;
         color: $text-color-dark;
       }
 
       a {
         color: $main-color;
-        margin-bottom: 5px;
       }
 
       form {
@@ -177,14 +181,28 @@
         }
 
         &.id {
-          width: 40px;
+          width: 60px;
         }
+
+        &.list_btn{
+          a {
+            display: block;
+
+            &.delete_btn {
+              color: #D47468;
+            }
+          }
+
+          
+        }
+         
       }
     }
 
-    &.deleted {
+    .deleted {
       background-color: unset;
       box-shadow: none;
+      color: #adacac;
     }
 
   }

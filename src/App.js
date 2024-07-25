@@ -18,6 +18,7 @@ import UserList from './pages/admin/UserList';
 import UserCreate from './pages/admin/UserCreate';
 import { AuthProvider } from './contexts/AuthContext';
 import ProtectedRoute from './auth/ProtectedRoute';
+import PortfolioContextLayout from './layouts/AdminPortfolioContextLayout';
 
 function App() {
   useEffect(() => {
@@ -44,10 +45,13 @@ function App() {
               
               {/* ============== Admin ==============*/}
               <Route element={<ProtectedRoute />}>
-                <Route path="/admin" element={<AdminLayout><PortfolioList /></AdminLayout>} />
-                <Route path="/admin/portfolio-list" element={<AdminLayout><PortfolioList /></AdminLayout>} />
-                <Route path="/admin/portfolio-create" element={<AdminLayout><PortfolioCreate /></AdminLayout>} />
-                <Route path="/admin/portfolio-edit" element={<AdminLayout><PortfolioEdit /></AdminLayout>} />
+                <Route element={<PortfolioContextLayout />}>
+                  <Route path="/admin" element={<AdminLayout><PortfolioList /></AdminLayout>} />
+                  <Route path="/admin/portfolio-list" element={<AdminLayout><PortfolioList /></AdminLayout>} />
+                  <Route path="/admin/portfolio-create" element={<AdminLayout><PortfolioCreate /></AdminLayout>} />
+                  <Route path="/admin/portfolio-edit" element={<AdminLayout><PortfolioEdit /></AdminLayout>} />
+                </Route>
+
                 <Route path="/admin/user-list" element={<AdminLayout><UserList /></AdminLayout>} />
                 <Route path="/admin/user-create" element={<AdminLayout><UserCreate /></AdminLayout>} />
                 <Route path="/admin/traffic" element={<AdminLayout><Traffic /></AdminLayout>} />
