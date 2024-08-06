@@ -1,5 +1,10 @@
 import { Link } from "react-router-dom";
 
+/**
+ * Reusable portfolio list item 
+ * @param {*} param0 database profolio items
+ * @returns 
+ */
 function PortfolioItems ({items}) {
   return items.map((item, index) => {
     return (

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { postUser } from '../../services/usesApi';
+import { postUserApi} from '../../services/usesApi';
 
 function UserCreate() {
 
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [isAdmin, setIsAdmin] = useState('No');
 
@@ -11,11 +11,11 @@ function UserCreate() {
       e.preventDefault();
 
       // post user to server via api
-      postUser(email, password, isAdmin);
+      postUserApi(username, password, isAdmin);
 
-      setEmail('');
+      setUsername('');
       setPassword('');
-      setIsAdmin('no')
+      setIsAdmin('no');
     }
 
   return (
@@ -29,8 +29,8 @@ function UserCreate() {
 
               <form onSubmit={handleSubmit}  encType="multipart/form-data" noValidate>
                   <p>
-                    <label htmlFor="email">Email</label>
-                    <input type="text" name="email" id="email" value={email || ''} onChange={(e) => setEmail(e.target.value)} required />
+                    <label htmlFor="username">Username</label>
+                    <input type="text" name="username" id="username" value={username || ''} onChange={(e) => setUsername(e.target.value)} required />
                     {/* <span className="error">Error</span> */}
                   </p>
 

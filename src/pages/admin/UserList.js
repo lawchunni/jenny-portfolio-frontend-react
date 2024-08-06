@@ -57,7 +57,7 @@ function User() {
                   return (
                     <div className="row" key={index}>
                       <div className="col col-4">{item._id}</div>
-                      <div className="col col-6">{item.email}</div>
+                      <div className="col col-6">{item.username}</div>
                       <div className="col col-2">{item.isAdmin}</div>
                     </div>
                   )

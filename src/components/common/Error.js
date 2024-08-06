@@ -1,9 +1,11 @@
 function Error () {
   return (
     <>
-      <div className="message error">
-        Failed to load data.
-      </div>
+      <section className="message error">
+        <div className="wrapper">
+          <p>Failed to load data...</p>
+        </div>
+      </section>
     </>
   )
 }

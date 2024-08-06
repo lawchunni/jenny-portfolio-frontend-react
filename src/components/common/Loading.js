@@ -1,9 +1,11 @@
 function Loading () {
   return (
     <>
-      <div className="message loading">
-        Loading...
-      </div>
+      <section className="message loading">
+        <div className="wrapper">
+          <p>Loading...</p>
+        </div>
+      </section>
     </>
   )
 }

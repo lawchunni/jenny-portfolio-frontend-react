@@ -10,7 +10,7 @@ const fetchUsersFromApi = async () => {
 }
 
 // post new user to database use api
-const postUser = async (email, password, isAdmin) => {
+const postUserApi = async (email, password, isAdmin) => {
   try {
     const res = await fetch('http://127.0.0.1:4000/users', {
       method: 'POST',
@@ -37,4 +37,4 @@ const postUser = async (email, password, isAdmin) => {
   }
 }
 
-export { fetchUsersFromApi, postUser };
+export { fetchUsersFromApi, postUserApi };

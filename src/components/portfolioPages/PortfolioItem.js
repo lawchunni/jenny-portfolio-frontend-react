@@ -57,7 +57,7 @@ function PortfolioItem ({id}) {
             {
               data.images.map((item, index) => {
                 return (
-                  <div className="item">
+                  <div className="item" key={index}>
                     <img key={index} src={ require(`../../assets/images/${item}`)} alt="img desc" />
                   </div>
                 )

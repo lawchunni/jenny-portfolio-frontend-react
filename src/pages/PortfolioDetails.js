@@ -6,7 +6,7 @@ function PortfolioDetails() {
   const portfolioId = useParams();
 
   return (
-    <SelectedPortfolioContextProvider>
+    <SelectedPortfolioContextProvider path="portfolio">
       <section id="portfolio_details">
         <div className="wrapper">
           <PortfolioItem id={portfolioId.id} />
