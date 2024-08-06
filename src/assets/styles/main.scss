@@ -115,7 +115,7 @@ form label a {
   text-align: center;
 
   &.loading {
-    color: #fff;
+    color: $text-color-dark;
   }
 
   &.error {

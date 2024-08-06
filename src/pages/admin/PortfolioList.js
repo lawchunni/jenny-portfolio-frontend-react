@@ -4,7 +4,7 @@ import { PortfolioContext } from "../../contexts/PortfolioContext";
 import Loading from "../../components/common/Loading";
 import Error from "../../components/common/Error";
 
-function PortfolioList() {
+const PortfolioList = () => {
   const {data, loading, error} = useContext(PortfolioContext);
 
   if (loading) return (<><Loading /></>);
@@ -50,7 +50,7 @@ function PortfolioList() {
                           <div className="col col-2">{item.highlight ? 'Yes' : 'No'}</div>
                           <div className="col col-2">{item.deleted ? 'Yes' : 'No'}</div>
                           <div className="col col-1 list_btn">
-                            <Link to="/admin/portfolio-edit">Edit</Link>
+                            <Link to={`/admin/portfolio-edit/${item._id}`}>Edit</Link>
 
                             <a href="/" className="btn delete_btn" type="submit" name="delete" value="delete">delete</a>
                           </div>

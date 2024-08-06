@@ -10,9 +10,9 @@ const fetchPortfolioFromAPI = async () => {
 };
 
 // fetch single portfolio item from API
-const fetchSelectedPortfolioFromAPI = async (id) => {
+const fetchSelectedPortfolioFromAPI = async (path, id) => {
   try {
-    const res = await fetch(`http://127.0.0.1:4000/portfolio/${id}`);
+    const res = await fetch(`http://127.0.0.1:4000/${path}/${id}`);
     const data = await res.json();
     return data;
   } catch (err) {
@@ -20,6 +20,40 @@ const fetchSelectedPortfolioFromAPI = async (id) => {
   }
 }
 
+/** 
+ * javascript comment 
+ * @Author: Jenny 
+ * @Date: 2024-08-05 18:38:11 
+ * @Desc: 
+ * (path): eg. portfolio-edit
+ * (id): single portfolio id
+ * (inputData): Object item
+ * Update a record in portfolio collection
+ */
+const updatePortfolioApi = async (path, id, inputData) => {
+  try {
+    const res = await fetch(`http://127.0.0.1:4000/admin/${path}/${id}`, {
+      method: 'PUT',
+      mode: 'cors',
+      headers: {
+        'Content-type': 'application/json; charset=utf-8'
+      },
+      body: JSON.stringify(inputData)
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      alert(data.message);
+    } else {
+      alert(`Failed to update portfolio item`);
+    }
+  } catch (error) {
+    alert('Error: ' + error.message);
+  }
+}
+
 export {
-  fetchPortfolioFromAPI, fetchSelectedPortfolioFromAPI
+  fetchPortfolioFromAPI, 
+  fetchSelectedPortfolioFromAPI,
+  updatePortfolioApi
 };

@@ -3,7 +3,12 @@ import { fetchSelectedPortfolioFromAPI } from "../services/portfolioApi";
 
 const SelectedPortfolioContext = createContext();
 
-const SelectedPortfolioContextProvider = ({ children}) => {
+/**
+ * 
+ * @param {*} path to be passed into api to fetch data from database. eg. 'portfolio', 'admin/portfolio-edit'. No '/' at front or end
+ * @returns 
+ */
+const SelectedPortfolioContextProvider = ({path, children}) => {
 
   const [id, setId] = useState(null)
   const [data, setData] = useState([]);
@@ -13,9 +18,13 @@ const SelectedPortfolioContextProvider = ({ children}) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const fetchedData = await fetchSelectedPortfolioFromAPI(id);
-        setData(fetchedData);
-        setLoading(false);
+        const fetchedData = await fetchSelectedPortfolioFromAPI(path, id);
+        if(fetchedData) {
+          setData(fetchedData);
+          setLoading(false);
+        } else {
+          setLoading(true);
+        }
       } catch (err) {
         setError(err);
         setError(false);
@@ -25,13 +34,11 @@ const SelectedPortfolioContextProvider = ({ children}) => {
     if(id) {
       fetchData();
     }
-  }, [id]);
+  }, [path, id]);
 
   const updateId = (id) => {
     setId(id);
   }
-
- 
 
   return (
     <SelectedPortfolioContext.Provider value={{ data, loading, error, updateId }}>

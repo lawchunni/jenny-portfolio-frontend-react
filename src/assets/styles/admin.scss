@@ -150,7 +150,7 @@
 
       form {
         .btn {
-          color: #e66453;
+          color: $text-color-attation;
           border: none;
           background-color: unset;
           cursor: pointer;
@@ -215,7 +215,7 @@
     font-family: 'Kanit', sans-serif;
 
     form {
-      label {
+      label, .title {
         vertical-align: top;
         margin-right: 16px;
         width: 160px;
@@ -225,11 +225,18 @@
         padding: 10px 5px;
       }
 
+      .value {
+        display: inline-block;
+        vertical-align: top;
+        color: #4a4a4a;
+        padding: 10px 5px;
+      }
+
       input[type=radio] {
         margin: 15px 2px;
       }
 
-      input[type=text], input[type=password], textarea {
+      input[type=text], input[type=password], textarea,  {
         font-size: 16px;
         padding: 10px 5px;
         width: calc(100% - 205px);
@@ -247,7 +254,7 @@
         }
 
         img{
-          width: 100px;
+          width: 60px;
           height: auto;
         }
       }
@@ -268,6 +275,7 @@
       .error {
         display: block;
         font-weight: 400;
+        color: $text-color-attation;
       }
     }
   }

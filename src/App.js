@@ -19,6 +19,7 @@ import UserCreate from './pages/admin/UserCreate';
 import { AuthProvider } from './contexts/AuthContext';
 import ProtectedRoute from './auth/ProtectedRoute';
 import PortfolioContextLayout from './layouts/AdminPortfolioContextLayout';
+import AdminSelectedPortfolioContextLayout from './layouts/AdminSelectedPortfolioContextLayout';
 
 function App() {
   useEffect(() => {
@@ -48,9 +49,13 @@ function App() {
                 <Route element={<PortfolioContextLayout />}>
                   <Route path="/admin" element={<AdminLayout><PortfolioList /></AdminLayout>} />
                   <Route path="/admin/portfolio-list" element={<AdminLayout><PortfolioList /></AdminLayout>} />
-                  <Route path="/admin/portfolio-create" element={<AdminLayout><PortfolioCreate /></AdminLayout>} />
-                  <Route path="/admin/portfolio-edit" element={<AdminLayout><PortfolioEdit /></AdminLayout>} />
                 </Route>
+
+                <Route element={<AdminSelectedPortfolioContextLayout path="admin/portfolio-edit" />}>
+                  <Route path="/admin/portfolio-edit/:id" element={<AdminLayout><PortfolioEdit /></AdminLayout>} />
+                </Route>
+
+                  <Route path="/admin/portfolio-create" element={<AdminLayout><PortfolioCreate /></AdminLayout>} />
 
                 <Route path="/admin/user-list" element={<AdminLayout><UserList /></AdminLayout>} />
                 <Route path="/admin/user-create" element={<AdminLayout><UserCreate /></AdminLayout>} />
