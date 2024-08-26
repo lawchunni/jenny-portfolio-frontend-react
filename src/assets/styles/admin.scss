@@ -215,7 +215,7 @@
     font-family: 'Kanit', sans-serif;
 
     form {
-      label, .title {
+      label, .left {
         vertical-align: top;
         margin-right: 16px;
         width: 160px;
@@ -225,18 +225,29 @@
         padding: 10px 5px;
       }
 
-      .value {
+      .right {
         display: inline-block;
         vertical-align: top;
         color: #4a4a4a;
         padding: 10px 5px;
       }
+      .preview_img {
+        display: inline-block;
+        margin-right: 10px;
+
+        .delete_img {
+          display: block;
+          color: $text-color-attation;
+          cursor: pointer;
+        }
+      }
+      
 
       input[type=radio] {
         margin: 15px 2px;
       }
 
-      input[type=text], input[type=password], textarea,  {
+      input[type=text], input[type=password], textarea {
         font-size: 16px;
         padding: 10px 5px;
         width: calc(100% - 205px);

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { PortfolioContext } from "../../contexts/PortfolioContext";
 import Loading from "../../components/common/Loading";
@@ -6,6 +6,11 @@ import Error from "../../components/common/Error";
 
 const PortfolioList = () => {
   const {data, loading, error} = useContext(PortfolioContext);
+  const [displayData, setDisplayData] = useState(null);
+
+  useEffect(() => {
+    setDisplayData(data)
+  }, [setDisplayData, data]);
 
   if (loading) return (<><Loading /></>);
 
@@ -34,23 +39,23 @@ const PortfolioList = () => {
                   <div className="col col-1"></div>
                 </div>
                   {
-                    data.map((item, index) => {
+                    displayData.map((item, index) => {
                       return(
-                        <div className={`row ${item.deleted ? 'deleted' : ''}`} key={index}>
-                          <div className="col col-1">{item._id}</div>
-                          <div className="col col-2">{item.title}</div>
+                        <div className={`row ${item?.deleted ? 'deleted' : ''}`} key={index}>
+                          <div className="col col-1">{item?._id}</div>
+                          <div className="col col-2">{item?.title}</div>
                           <div className="col col-2">
-                            <img src={require('../../assets/images/' + item.thumbnail)} alt={item.title} width={80}/>
+                            <img src={'http://127.0.0.1:4000' + item?.thumbnail} alt={item?.title} width={80}/>
                           </div>
                           <div className="col col-2">
                             {
-                              item.tags.join(' | ')
+                              item?.tags
                             }
                           </div>
-                          <div className="col col-2">{item.highlight ? 'Yes' : 'No'}</div>
-                          <div className="col col-2">{item.deleted ? 'Yes' : 'No'}</div>
+                          <div className="col col-2">{item?.highlight ? 'Yes' : 'No'}</div>
+                          <div className="col col-2">{item?.deleted ? 'Yes' : 'No'}</div>
                           <div className="col col-1 list_btn">
-                            <Link to={`/admin/portfolio-edit/${item._id}`}>Edit</Link>
+                            <Link to={`/admin/portfolio-edit/${item?._id}`}>Edit</Link>
 
                             <a href="/" className="btn delete_btn" type="submit" name="delete" value="delete">delete</a>
                           </div>

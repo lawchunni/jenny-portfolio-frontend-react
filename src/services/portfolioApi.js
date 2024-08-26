@@ -35,20 +35,20 @@ const updatePortfolioApi = async (path, id, inputData) => {
     const res = await fetch(`http://127.0.0.1:4000/admin/${path}/${id}`, {
       method: 'PUT',
       mode: 'cors',
-      headers: {
-        'Content-type': 'application/json; charset=utf-8'
-      },
-      body: JSON.stringify(inputData)
+      body: inputData
     });
 
     if (res.ok) {
       const data = await res.json();
       alert(data.message);
+      return true;
     } else {
       alert(`Failed to update portfolio item`);
+      return false;
     }
   } catch (error) {
     alert('Error: ' + error.message);
+    return false;
   }
 }
 

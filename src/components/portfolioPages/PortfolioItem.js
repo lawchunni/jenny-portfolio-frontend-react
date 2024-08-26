@@ -35,15 +35,20 @@ function PortfolioItem ({id}) {
 
   return (
     <>
-      <h1>{ data.title }</h1>
+      <h1>{ data?.title }</h1>
 
       <div className="content">
         <div className="desc">
           <h2>Description</h2>
           <div className="portfolio_tag">
-            <span>Test</span>
+            {data?.tags.split('|').map((item, index) => {
+              return (
+                <span key={index}>{item}</span>
+              )
+            })}
+            
           </div>
-          <p>{ data.desc_long }</p>
+          <p>{ data?.desc_long }</p>
         </div>
         
         <div className="thumbnails">
@@ -55,10 +60,10 @@ function PortfolioItem ({id}) {
             dotListClass="portfolio-dot-list-style"
           >
             {
-              data.images.map((item, index) => {
+              data?.images.map((item, index) => {
                 return (
                   <div className="item" key={index}>
-                    <img key={index} src={ require(`../../assets/images/${item}`)} alt="img desc" />
+                    <img key={index} src={ `http://127.0.0.1:4000${item}`} alt="img desc" />
                   </div>
                 )
               })

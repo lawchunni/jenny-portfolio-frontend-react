@@ -63,6 +63,12 @@ a {
   text-decoration: none;
 }
 
+button {
+  border: none;
+  background-color: rgba(255,255,255,0);
+  cursor: pointer;
+}
+
 input, select, textarea {
   font-size: 16px;
   font-family: 'courier new', courier, serif;

@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
-import { PortfolioContext, PortfolioContextProvider } from '../contexts/PortfolioContext';
+import { PortfolioContextProvider } from '../contexts/PortfolioContext';
 import PortfolioHighlights from '../components/home/PortfolioHighlights';
 
 function Home() {

@@ -23,7 +23,7 @@ function PortfolioHighlights() {
               <div key={index} className="item">
                 <div className="circle_icon">
                   <Link to={`/portfolio-details/${item._id}`} className="circle"></Link>
-                  <Link to={`/portfolio-details/${item._id}`}><img className="work-icon" src={ require('../../assets/images/' + item.thumbnail) } alt={ item.thumbnail } width={145} height={93} /></Link>
+                  <Link to={`/portfolio-details/${item._id}`}><img className="work-icon" src={ 'http://127.0.0.1:4000' + item.thumbnail } alt={ item.thumbnail } width={145} height={93} /></Link>
                   
                   <img className="shadow" src={ require('../../assets/images/blurry-shadow.png') } alt="blurry shadow" width={60} height={24} />
                 </div>
