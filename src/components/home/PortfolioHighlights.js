@@ -18,7 +18,7 @@ function PortfolioHighlights() {
     <div className="flex">
     {
         data.map((item, index) => {
-          if (item.highlight) {
+          if (item.highlight && !item.deleted) {
             return (
               <div key={index} className="item">
                 <div className="circle_icon">
