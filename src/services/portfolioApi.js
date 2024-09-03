@@ -1,4 +1,9 @@
-// fetch pofolio list from API
+import { getLocalStorage } from "../hooks/useLocalStorage";
+
+/** 
+ * @Desc:  
+ * fetch pofolio list from API
+ */
 const fetchPortfolioFromAPI = async () => {
   try {
     const res = await fetch('http://127.0.0.1:4000/portfolio');
@@ -9,12 +14,31 @@ const fetchPortfolioFromAPI = async () => {
   }
 };
 
-// fetch single portfolio item from API
+/** 
+ * @Desc:  
+ * (path): eg. admin/portfolio-edit
+ * (id): portfolio item id
+ * fetch single portfolio item from API
+ */
 const fetchSelectedPortfolioFromAPI = async (path, id) => {
+  const token = getLocalStorage('token');
+
   try {
-    const res = await fetch(`http://127.0.0.1:4000/${path}/${id}`);
-    const data = await res.json();
-    return data;
+    const res = await fetch(`http://127.0.0.1:4000/${path}/${id}`, {
+      method: 'GET',
+      headers: {
+        'Authorization' : `Bearer ${token.replace(/['"]+/g, '')}`,
+      }
+    });
+    const result = await res.json();
+
+    if (res.ok) {
+      return result;
+    } else {
+      alert('Failed to fetch data from api: ' + result.message);
+      return null;
+    }
+
   } catch (err) {
     throw new Error('Failed to fetch data from API');
   }
@@ -26,10 +50,15 @@ const fetchSelectedPortfolioFromAPI = async (path, id) => {
  * Create a new record in portfolio collection
  */
 const createPortfolioApi = async (inputData) => {
+  const token = getLocalStorage('token');
+  
   try {
     const res = await fetch(`http://127.0.0.1:4000/admin/portfolio`, {
       method: 'POST',
       mode: 'cors',
+      headers: {
+        'Authorization' : `Bearer ${token.replace(/['"]+/g, '')}`,
+      },
       body: inputData
     });
 
@@ -55,10 +84,15 @@ const createPortfolioApi = async (inputData) => {
  * Update a record in portfolio collection
  */
 const updatePortfolioApi = async (path, id, inputData) => {
+  const token = getLocalStorage('token');
+
   try {
     const res = await fetch(`http://127.0.0.1:4000/admin/${path}/${id}`, {
       method: 'PUT',
       mode: 'cors',
+      headers: {
+        'Authorization' : `Bearer ${token.replace(/['"]+/g, '')}`,
+      },
       body: inputData
     });
 

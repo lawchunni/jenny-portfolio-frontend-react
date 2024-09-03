@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { postUserApi} from '../../services/usesApi';
+import { createUserApi} from '../../services/userApi';
+import { useNavigate } from 'react-router-dom';
 
 function UserCreate() {
 
@@ -7,15 +8,26 @@ function UserCreate() {
     const [password, setPassword] = useState('');
     const [isAdmin, setIsAdmin] = useState('No');
 
+    const navigate = useNavigate();
+
     const handleSubmit = async (e) => {
       e.preventDefault();
+     
+      try {
+        const sendInputToServer = createUserApi(username, password, isAdmin);  // post user to server via api
+        
+        if (sendInputToServer) {
+          navigate("../admin/user-list");
+        }
 
-      // post user to server via api
-      postUserApi(username, password, isAdmin);
+        setUsername('');
+        setPassword('');
+        setIsAdmin('no');
 
-      setUsername('');
-      setPassword('');
-      setIsAdmin('no');
+      } catch (err) {
+        alert('Error: ' + err.message);
+      }
+
     }
 
   return (
@@ -30,13 +42,13 @@ function UserCreate() {
               <form onSubmit={handleSubmit}  encType="multipart/form-data" noValidate>
                   <p>
                     <label htmlFor="username">Username</label>
-                    <input type="text" name="username" id="username" value={username || ''} onChange={(e) => setUsername(e.target.value)} required />
+                    <input type="text" name="username" id="username" onChange={(e) => setUsername(e.target.value)} required />
                     {/* <span className="error">Error</span> */}
                   </p>
 
                   <p>
                     <label htmlFor="password">Password</label>
-                    <input type="password" name="password" id="password" value={password || ''} onChange={(e) => setPassword(e.target.value)} required/>
+                    <input type="password" name="password" id="password" onChange={(e) => setPassword(e.target.value)} required/>
                     {/* <span className="error">Error</span> */}
                   </p>
                   

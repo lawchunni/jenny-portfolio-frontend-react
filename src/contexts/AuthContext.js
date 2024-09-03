@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [auth, setAuth] = useLocalStorage('auth', null);
+  const [auth, setAuth] = useLocalStorage('token', null);
   const [admin, setAdmin] = useLocalStorage('admin', null);
   const navigate = useNavigate();
 

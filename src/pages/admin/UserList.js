@@ -1,24 +1,37 @@
-import { Link } from "react-router-dom";
-import { fetchUsersFromApi } from "../../services/usesApi";
+import { Link, useNavigate } from "react-router-dom";
+import { fetchUsersFromApi } from "../../services/userApi";
 import { useEffect, useState } from "react";
 
 function User() {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const navigate = useNavigate();
 
-  const fetchData = async () => {
-    try {
-      setError(false);
-      const fetchedData = await fetchUsersFromApi();
-      setData(fetchedData);
-    } catch (err) {
-      setError(true);
+  useEffect(() => {
+
+    const fetchData = async () => {
+      try {
+        setError(false);
+        const fetchedData = await fetchUsersFromApi();
+  
+        if (!fetchedData) { // Invalid token or failed to fetch data 
+          navigate("/", {replace: true});
+          return;
+        } else {
+          setData(fetchedData);
+        }
+        
+      } catch (err) {
+        setError(true);
+      }
     }
-  }
+
+    fetchData();
+  
+  }, [navigate]);
+
+ 
 
   if (error) {
     return (
@@ -56,9 +69,9 @@ function User() {
                 data.map((item, index) => {
                   return (
                     <div className="row" key={index}>
-                      <div className="col col-4">{item._id}</div>
-                      <div className="col col-6">{item.username}</div>
-                      <div className="col col-2">{item.isAdmin}</div>
+                      <div className="col col-4">{item?._id}</div>
+                      <div className="col col-6">{item?.username}</div>
+                      <div className="col col-2">{item?.isAdmin}</div>
                     </div>
                   )
                 })
