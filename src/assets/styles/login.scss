@@ -1,13 +1,60 @@
-#login .content {
-  max-width: 70%;
-  margin: 0 auto;
-  max-width: 320px;
-}
+.login_form {
+  .content {
+    max-width: 70%;
+    margin: 0 auto;
+    max-width: 320px;
+  }
 
-#login form .field {
-  margin-bottom: 35px;
-}
+  form {
+    .field {
+      margin-bottom: 35px;
+    }
 
-.submit_button, .forget_password {
-  margin-top: 30px;
+    p {
+      position: relative;
+
+      &.required {
+        &:after {
+          content: '*';
+          position: absolute;
+          right: -4px;
+          top: 0;
+          color: $secondary-color;
+          font-size: 16px;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+  input:not([type=checkbox]) {
+    background: #fff;
+    border: none;
+    border-bottom: 2px solid rgba(255,255,255,.7);
+    padding: 16px 10px;
+    width: calc(100% - 10px);
+    font-size: 16px;
+    @include transition(all .3s ease-in-out);
+  }
+  
+  p {
+    color: #fff;
+  }
+
+  .highlight {
+    color: $secondary-color;
+    font-weight: bold;
+    padding-bottom: 20px;
+  }
+
+  .submit_button, .forget_password {
+    margin-top: 30px;
+  }
+
+  .submit_button {
+    width: 200px;
+    display: block;
+    margin: 0 auto;
+    cursor: pointer;
+  }
 }

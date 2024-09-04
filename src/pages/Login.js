@@ -1,35 +1,29 @@
 import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
+import authApi from "../services/authApi";
 
 function Login() {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
   const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const res = await fetch('http://127.0.0.1:4000/api/auth', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ username: username, password })
-      });
+    const verifyUserOnServer = async () => {
 
-      const data = await res.json();
-  
-      if(res.ok) {
+      try {
+        const data = await authApi(username, password);
         await login(data);
-        alert(data.message);
-      } else {
-        alert(data.message);
+        setError(false);
+      } catch (err) {
+        setError(true);
       }
-    } catch (err) {
-      alert('Login failed: ' + err.message);
     }
+
+    verifyUserOnServer();
 
     setUsername('');
     setPassword('');
@@ -37,7 +31,7 @@ function Login() {
 
   return (
     <>
-      <section id="login" className="submit_form">
+      <section id="login" className="login_form">
         <div className="wrapper">
           <div className="content">
             <h1>Login</h1>
