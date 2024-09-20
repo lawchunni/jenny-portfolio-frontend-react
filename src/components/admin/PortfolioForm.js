@@ -6,6 +6,9 @@ import { useForm } from "react-hook-form";
 import DOMPurify from "dompurify";
 import { createPortfolioApi, updatePortfolioApi } from "../../services/portfolioApi";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
+import { useTokenValidation } from "../../hooks/useTokenValidation";
+import { useLogout } from "../../hooks/useLogout";
 
 const TYPE_CREATE = 'create';
 const TYPE_UPDATE = 'update';
@@ -34,8 +37,6 @@ const PortfolioForm = ({ type, data = null }) => {
     slug: yup.string().required('Slug is required').max(50, 'Slug must be under 50 charactors.')
   });
 
-  const navigate = useNavigate();
-
   // apply form validation and handle submit
   const { register, handleSubmit, formState: { errors }, setValue, resetField } = useForm({
     resolver: yupResolver(schema)
@@ -46,6 +47,12 @@ const PortfolioForm = ({ type, data = null }) => {
   const [thumbnailPreview, setThumbnailPreview] = useState(null);
   const [selectedImages, setSelectedImages] = useState([]);
   const [imagePreview, setImagePreview] = useState([]);
+
+  const navigate = useNavigate();
+
+  const { getRefreshToken } = useAuth();
+  const { validateAndFetchData } = useTokenValidation();
+  const  logoutFromServer = useLogout();
 
   // Thumbnail upload and preview
   const handleThumbnailChange = (e) => {
@@ -133,26 +140,53 @@ const PortfolioForm = ({ type, data = null }) => {
     }
 
     if ( type === TYPE_CREATE ) {
-    // create new for data via api
+      // create new for data via api
       try {
-        const sendFormToServer = createPortfolioApi(formData);
+        const sendFormToServer = await validateAndFetchData({
+          fetchDataFunc: createPortfolioApi, 
+          type: 'CREATE',
+          data: formData
+        });
 
         if (sendFormToServer) {
           navigate("../admin/portfolio-list");
+        } else {
+          // only logout user when refresh token is missing
+          if (!getRefreshToken()) {
+            const handleLogout = async () => {
+              await logoutFromServer();
+            }
+            handleLogout();
+            return;
+          }
         }
       } catch (err) {
         alert('Error: ' + err.message);
       }
-
+    
     } else if( type === TYPE_UPDATE ) {
     // update existing form data via api
       try {
-        const sendFormToServer = updatePortfolioApi('portfolio-edit', id, formData);
+        const sendFormToServer = await validateAndFetchData({
+          fetchDataFunc: updatePortfolioApi, 
+          path: 'portfolio-edit', 
+          id: id, 
+          data: formData
+        });
         
         if (sendFormToServer) {
           navigate("../admin/portfolio-list");
+        } else {
+           // only logout user when refresh token is missing
+           if (!getRefreshToken()) {
+            const handleLogout = async () => {
+              await logoutFromServer();
+            }
+            handleLogout();
+            return;
+          }
         }
-  
+
       } catch (err) {
         alert('Error: ' + err.message);
       }

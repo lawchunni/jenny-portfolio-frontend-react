@@ -1,16 +1,52 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { PortfolioContext } from "../../contexts/PortfolioContext";
 import Loading from "../../components/common/Loading";
 import Error from "../../components/common/Error";
+import { useLogout } from "../../hooks/useLogout";
+import { useTokenValidation } from "../../hooks/useTokenValidation";
+import { useAuth } from "../../contexts/AuthContext";
+import { fetchAdminPortfolioFromAPI } from "../../services/portfolioApi";
 
 const PortfolioList = () => {
-  const {data, loading, error} = useContext(PortfolioContext);
-  const [displayData, setDisplayData] = useState(null);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+const { accessToken, getRefreshToken } = useAuth();
+  const { validateAndFetchData } = useTokenValidation();
+  const  logoutFromServer = useLogout();
 
   useEffect(() => {
-    setDisplayData(data)
-  }, [setDisplayData, data]);
+
+    const fetchData = async () => {
+      try {
+        const fetchedData = await validateAndFetchData({fetchDataFunc: fetchAdminPortfolioFromAPI});
+  
+        if(fetchAdminPortfolioFromAPI) {
+          setData(fetchedData);
+          setLoading(false);
+        } else {
+           // only logout user when refresh token is missing
+           if (!getRefreshToken()) {
+            const handleLogout = async () => {
+              await logoutFromServer();
+            }
+            handleLogout();
+            return;
+          }
+        }
+        
+      } catch (err) {
+        setError(true);
+        console.error('Failed to load portfolio list:', err);
+      }
+    }
+  
+    fetchData();
+
+  }, [accessToken, getRefreshToken, logoutFromServer, validateAndFetchData]);
+
+ 
 
   if (loading) return (<><Loading /></>);
 
@@ -39,7 +75,7 @@ const PortfolioList = () => {
                   <div className="col col-1"></div>
                 </div>
                   {
-                    displayData.map((item, index) => {
+                    data.map((item, index) => {
                       return(
                         <div className={`row ${item?.deleted ? 'deleted' : ''}`} key={index}>
                           <div className="col col-1">{item?._id}</div>

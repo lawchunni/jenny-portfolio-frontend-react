@@ -1,13 +1,17 @@
-import { useAuth } from "../../contexts/AuthContext";
+import { useLogout } from "../../hooks/useLogout";
 
 // Button to logout users
 const LogoutBtn = ({display = true}) => {
+  const logoutFromServer = useLogout();
 
-  const { logout } = useAuth();
+  const handleLogout = async () => {
+
+    await logoutFromServer();
+  }
 
   if(display) {
     return (
-      <button className="logout_btn" title="logout" onClick={logout}>Logout</button>
+      <button className="logout_btn" title="logout" onClick={handleLogout}>Logout</button>
     )
   }
 }

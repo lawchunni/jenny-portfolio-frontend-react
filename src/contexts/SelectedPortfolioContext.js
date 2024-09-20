@@ -5,20 +5,26 @@ const SelectedPortfolioContext = createContext();
 
 /**
  * 
- * @param {*} path to be passed into api to fetch data from database. eg. 'portfolio', 'admin/portfolio-edit'. No '/' at front or end
+ * @param {*} path to be passed into api to fetch data from database. eg. 'portfolio', 'admin/portfolio-edit'. No '/' in the front or at the end
  * @returns 
  */
-const SelectedPortfolioContextProvider = ({path, children}) => {
+const SelectedPortfolioContextProvider = ({path, children, isAdmin = false}) => {
 
   const [id, setId] = useState(null)
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [token, setToken] = useState('');
 
   useEffect(() => {
-    const fetchData = async () => {
+
+    // fetch a single portfolio item from server
+    const fetchData = async (getToken) => {
+      
       try {
-        const fetchedData = await fetchSelectedPortfolioFromAPI(path, id);
+        setError(false);
+        
+        const fetchedData = await fetchSelectedPortfolioFromAPI(getToken, path, id);
         if(fetchedData) {
           setData(fetchedData);
           setLoading(false);
@@ -26,22 +32,30 @@ const SelectedPortfolioContextProvider = ({path, children}) => {
           setLoading(true);
         }
       } catch (err) {
-        setError(err);
-        setError(false);
+        console.error(err);
+        setError(true);
       }
     }
 
-    if(id) {
-      fetchData();
+    if (isAdmin && id && token) {
+      fetchData(token);
+    } else if (!isAdmin && id) {
+      fetchData('');
     }
-  }, [path, id]);
+
+  }, [path, token, isAdmin, id]);
 
   const updateId = (id) => {
     setId(id);
   }
 
+  const updateToken = (token) => {
+    setToken(token);
+  }
+
+
   return (
-    <SelectedPortfolioContext.Provider value={{ data, loading, error, updateId }}>
+    <SelectedPortfolioContext.Provider value={{ data, loading, error, updateId, updateToken }}>
       {children}
     </SelectedPortfolioContext.Provider>
   )

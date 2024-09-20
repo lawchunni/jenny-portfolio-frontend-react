@@ -1,37 +1,51 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { fetchUsersFromApi } from "../../services/userApi";
 import { useEffect, useState } from "react";
+import { useTokenValidation } from "../../hooks/useTokenValidation";
+import { useLogout } from "../../hooks/useLogout";
+import { useAuth } from "../../contexts/AuthContext";
 
-function User() {
+function UserList() {
+
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
-
-  const navigate = useNavigate();
+  const { accessToken, getRefreshToken } = useAuth();
+  const  logoutFromServer  = useLogout();
+  const { validateAndFetchData } = useTokenValidation();
 
   useEffect(() => {
 
     const fetchData = async () => {
       try {
         setError(false);
-        const fetchedData = await fetchUsersFromApi();
-  
-        if (!fetchedData) { // Invalid token or failed to fetch data 
-          navigate("/", {replace: true});
-          return;
-        } else {
+    
+        // validate the token before fetching the data 
+        const fetchedData = await validateAndFetchData({fetchDataFunc: fetchUsersFromApi});
+
+        if (fetchedData) {
           setData(fetchedData);
+        } else {
+          // only logout user when refresh token is missing
+          if (!getRefreshToken()) {
+            const handleLogout = async () => {
+              await logoutFromServer();
+            }
+            handleLogout();
+            return;
+          }
+          
         }
         
       } catch (err) {
         setError(true);
+        console.error('Failed to load portfolio:', err);
       }
     }
 
     fetchData();
   
-  }, [navigate]);
+  }, [accessToken, validateAndFetchData, logoutFromServer, getRefreshToken]);
 
- 
 
   if (error) {
     return (
@@ -85,4 +99,4 @@ function User() {
   )
 }
 
-export default User;
+export default UserList;

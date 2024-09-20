@@ -24,7 +24,7 @@ function Header() {
   const [ path, setPath ] = useState('');
   const location = useLocation();
   const getPath = location?.pathname;
-  const { auth } = useAuth(); 
+  const { accessToken } = useAuth(); 
 
   useEffect(() => {
     if (getPath) {
@@ -63,13 +63,12 @@ function Header() {
 
                 <Item name="portfolio" path={path} route="/portfolio" />
 
-                <Item name="login" path={path} route="/login" extraClassName="login_btn" display={!auth} />
+                <Item name="login" path={path} route="/login" extraClassName="login_btn" display={!accessToken} />
 
-                <Item name="admin" path={path} route="/admin/portfolio-list" extraClassName="admin_btn" display={auth} />
-
-                 {/* <!-- Logout button --> */}
+                <Item name="admin" path={path} route="/admin/portfolio-list" extraClassName="admin_btn" display={accessToken} />
+                
                 <li>
-                  <LogoutBtn display={auth} />
+                  <LogoutBtn display={accessToken} />
                 </li>
 
               </ul>

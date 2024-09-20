@@ -1,14 +1,43 @@
-import { getLocalStorage } from "../hooks/useLocalStorage";
-
 /** 
  * @Desc:  
  * fetch pofolio list from API
  */
 const fetchPortfolioFromAPI = async () => {
   try {
-    const res = await fetch('http://127.0.0.1:4000/portfolio');
-    const data = await res.json();
-    return data;
+    const res = await fetch('http://127.0.0.1:4000/portfolio', {
+      method: 'GET',
+    });
+    const result = await res.json();
+    if (res.ok) {
+      return result;
+    } else {
+      alert('Failed to fetch data from api: ' + result.message);
+      return null;
+    }
+  } catch (err) {
+    throw new Error('Failed to fetch data from API');
+  }
+};
+
+/** 
+ * @Desc:  
+ * fetch admin pofolio list from API
+ */
+const fetchAdminPortfolioFromAPI = async (token) => {
+  try {
+    const res = await fetch('http://127.0.0.1:4000/admin/portfolio', {
+      method: 'GET',
+      headers: {
+        'Authorization' : `Bearer ${token.replace(/['"]+/g, '')}`,
+      }
+    });
+    const result = await res.json();
+    if (res.ok) {
+      return result;
+    } else {
+      alert('Failed to fetch data from api: ' + result.message);
+      return null;
+    }
   } catch (err) {
     throw new Error('Failed to fetch data from API');
   }
@@ -20,8 +49,7 @@ const fetchPortfolioFromAPI = async () => {
  * (id): portfolio item id
  * fetch single portfolio item from API
  */
-const fetchSelectedPortfolioFromAPI = async (path, id) => {
-  const token = getLocalStorage('token');
+const fetchSelectedPortfolioFromAPI = async (token, path, id) => {
 
   try {
     const res = await fetch(`http://127.0.0.1:4000/${path}/${id}`, {
@@ -30,6 +58,7 @@ const fetchSelectedPortfolioFromAPI = async (path, id) => {
         'Authorization' : `Bearer ${token.replace(/['"]+/g, '')}`,
       }
     });
+
     const result = await res.json();
 
     if (res.ok) {
@@ -49,8 +78,7 @@ const fetchSelectedPortfolioFromAPI = async (path, id) => {
  * (inputData): create new item in object format
  * Create a new record in portfolio collection
  */
-const createPortfolioApi = async (inputData) => {
-  const token = getLocalStorage('token');
+const createPortfolioApi = async (token, inputData) => {
   
   try {
     const res = await fetch(`http://127.0.0.1:4000/admin/portfolio`, {
@@ -83,8 +111,7 @@ const createPortfolioApi = async (inputData) => {
  * (inputData): update item in object format
  * Update a record in portfolio collection
  */
-const updatePortfolioApi = async (path, id, inputData) => {
-  const token = getLocalStorage('token');
+const updatePortfolioApi = async (token, path, id, inputData) => {
 
   try {
     const res = await fetch(`http://127.0.0.1:4000/admin/${path}/${id}`, {
@@ -112,6 +139,7 @@ const updatePortfolioApi = async (path, id, inputData) => {
 
 export {
   fetchPortfolioFromAPI, 
+  fetchAdminPortfolioFromAPI,
   fetchSelectedPortfolioFromAPI,
   createPortfolioApi,
   updatePortfolioApi

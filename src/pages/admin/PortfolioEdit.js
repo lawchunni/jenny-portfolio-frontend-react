@@ -1,23 +1,61 @@
-import { useContext, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { SelectedPortfolioContext } from "../../contexts/SelectedPortfolioContext";
 import Loading from "../../components/common/Loading";
 import Error from "../../components/common/Error";
 import PortfolioForm from "../../components/admin/PortfolioForm";
+import { useAuth } from "../../contexts/AuthContext";
+import { useLogout } from "../../hooks/useLogout";
+import { useTokenValidation } from "../../hooks/useTokenValidation";
+import { fetchSelectedPortfolioFromAPI } from "../../services/portfolioApi";
 
 const PortfolioEdit = () => {
 
   const portfolioId = useParams();
 
-  // load data from database
-  const {data, loading, error, updateId} = useContext(SelectedPortfolioContext);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+ 
+  const { accessToken, getRefreshToken } = useAuth();
+  const { validateAndFetchData } = useTokenValidation();
+  const  logoutFromServer = useLogout();
 
   useEffect(() => {
-    if(portfolioId) {
-      updateId(portfolioId.id);
+    const fetchData = async () => {
+      setLoading(true);
+      setError(false);
+
+      try {
+        // validate the token before fetching the data 
+        // Pass the api path and portfolio id to the server from here 
+        const fetchedData = await validateAndFetchData({
+          fetchDataFunc: fetchSelectedPortfolioFromAPI, 
+          path: 'admin/portfolio-edit', 
+          id: portfolioId.id
+        });
+
+        if (fetchedData) {
+          setData(fetchedData);
+          setLoading(false);
+        } else {
+          // only logout user when refresh token is missing
+          if (!getRefreshToken()) {
+            const handleLogout = async () => {
+              await logoutFromServer();
+            }
+            handleLogout();
+            return;
+          }
+        }
+      } catch (err) {
+        setError(true);
+        console.error('Failed to load portfolio:', err);
+      }
     }
 
-  }, [updateId, portfolioId]);
+    fetchData();
+
+  }, [portfolioId, getRefreshToken, accessToken, logoutFromServer, validateAndFetchData]);
 
   if (loading) return (<><Loading /></>);
 

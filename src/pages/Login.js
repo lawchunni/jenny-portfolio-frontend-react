@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
-import authApi from "../services/authApi";
+import { loginApi } from "../services/authApi";
 
 function Login() {
 
@@ -15,7 +15,7 @@ function Login() {
     const verifyUserOnServer = async () => {
 
       try {
-        const data = await authApi(username, password);
+        const data = await loginApi(username, password);
         await login(data);
         setError(false);
       } catch (err) {

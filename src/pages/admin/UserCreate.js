@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { createUserApi} from '../../services/userApi';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext';
+import { useTokenValidation } from '../../hooks/useTokenValidation';
+import { useLogout } from '../../hooks/useLogout';
 
 function UserCreate() {
 
@@ -8,16 +11,39 @@ function UserCreate() {
     const [password, setPassword] = useState('');
     const [isAdmin, setIsAdmin] = useState('No');
 
+    const { getRefreshToken } = useAuth();
+    const { validateAndFetchData } = useTokenValidation();
+    const  logoutFromServer  = useLogout();
+
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
       e.preventDefault();
-     
+
+      const formData = new FormData();
+      
+      formData.append('username', username);
+      formData.append('password', password);
+      formData.append('isAdmin', isAdmin);
+
       try {
-        const sendInputToServer = createUserApi(username, password, isAdmin);  // post user to server via api
+        const sendFormToServer = await validateAndFetchData({
+          fetchDataFunc: createUserApi, 
+          type: 'CREATE',
+          data: formData
+        });  // post user to server via api
         
-        if (sendInputToServer) {
+        if (sendFormToServer) {
           navigate("../admin/user-list");
+        } else {
+         // only logout user when refresh token is missing
+          if (!getRefreshToken()) {
+            const handleLogout = async () => {
+              await logoutFromServer();
+            }
+            handleLogout();
+            return;
+          }
         }
 
         setUsername('');
@@ -27,7 +53,6 @@ function UserCreate() {
       } catch (err) {
         alert('Error: ' + err.message);
       }
-
     }
 
   return (
@@ -39,7 +64,7 @@ function UserCreate() {
 
             <div className="admin_form">
 
-              <form onSubmit={handleSubmit}  encType="multipart/form-data" noValidate>
+              <form onSubmit={handleSubmit} encType="multipart/form-data" noValidate>
                   <p>
                     <label htmlFor="username">Username</label>
                     <input type="text" name="username" id="username" onChange={(e) => setUsername(e.target.value)} required />

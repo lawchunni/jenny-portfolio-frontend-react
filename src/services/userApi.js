@@ -1,11 +1,10 @@
-import { getLocalStorage } from "../hooks/useLocalStorage";
-
 /** 
  * @Desc: 
- * fetch Users list from server
+ * fetch Users list from server for admin section
  */
-const fetchUsersFromApi = async () => {
-  const token = getLocalStorage('token');
+const fetchUsersFromApi = async (token) => {
+
+  if (!token) return null;
 
   try {
     const res = await fetch('http://127.0.0.1:4000/users', {
@@ -20,21 +19,22 @@ const fetchUsersFromApi = async () => {
     if (res.ok) {
       return result;
     } else {
-      alert('Failed to fetch data from api: ' + result.message);
+      alert('Failed to fetch user from api: ' + result.message);
       return null;
     }
     
   } catch (err) {
-    throw new Error('Failed to fetch data from API');
+    throw new Error('Failed to user data from API');
   }
 }
 
 /** 
  * @Desc: 
- * post new user to database use api
+ * post new user to database use api in admin section
  */
-const createUserApi = async (username, password, isAdmin) => {
-  const token = getLocalStorage('token');
+const createUserApi = async (token, inputData) => {
+  // check token before sending from to server
+  if (!token) return null;
 
   try {
     const res = await fetch('http://127.0.0.1:4000/users', {
@@ -42,13 +42,8 @@ const createUserApi = async (username, password, isAdmin) => {
       mode: 'cors',
       headers: {
         'Authorization' : `Bearer ${token.replace(/['"]+/g, '')}`,
-        'Content-type': 'application/json; charset=utf-8'
       },
-      body: JSON.stringify({
-        username: username,
-        password: password,
-        isAdmin: isAdmin
-      })
+      body: inputData
     });
 
     if (res.ok) {

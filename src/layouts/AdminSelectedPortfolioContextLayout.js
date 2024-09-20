@@ -3,7 +3,7 @@ import { SelectedPortfolioContextProvider } from "../contexts/SelectedPortfolioC
 
 const AdminSelectedPortfolioContextLayout = ({path}) => {
   return (
-    <SelectedPortfolioContextProvider path={path}>
+    <SelectedPortfolioContextProvider path={path} isAdmin={true}>
       <Outlet />
     </SelectedPortfolioContextProvider>
   )

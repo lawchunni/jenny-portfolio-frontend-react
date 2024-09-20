@@ -3,10 +3,10 @@
  * username, password, isAdmin
  * login authentication
  */
-const authApi = async (username, password) => {
+const loginApi = async (username, password) => {
 
   try {
-    const res = await fetch('http://127.0.0.1:4000/api/auth', {
+    const res = await fetch('http://127.0.0.1:4000/api/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -17,10 +17,6 @@ const authApi = async (username, password) => {
     const result = await res.json();
 
     if(res.ok) {
-      // await login(result);
-
-      console.log('authapi: ', result)
-
       alert(result.message);
       return result;
     } else {
@@ -28,8 +24,72 @@ const authApi = async (username, password) => {
       return null;
     }
   } catch (err) {
-    throw new Error('Failed to fetch data from API');
+    throw new Error('Failed to fetch data from server');
   }
 }
 
-export default authApi;
+/** 
+ * @Desc: 
+ * refreshToken: get from Cookies
+ * Logout user from server
+ */
+const logoutApi = async (refreshToken) => {
+ try {
+  const res = await fetch('http://127.0.0.1:4000/api/logout', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ refreshToken: refreshToken})
+  });
+
+  const result = await res.json();
+
+  alert(result.message);
+  return result;
+
+ } catch (err) {
+  throw new Error('Failed to logout from server');
+ }
+}
+
+/** 
+ * @Desc: 
+ * token: refreshToken from Cookies
+ * Api for protected data to get new access token from server
+ */
+const refreshTokenApi = async (refreshToken) => {
+
+  if (!refreshToken) {
+    throw new Error('No refresh token found');
+  }
+
+  try {
+    const res = await fetch('http://127.0.0.1:4000/api/refresh-token', {
+      method: 'POST',
+      // credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ refreshToken })
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      return data.accessToken;
+    } else {
+      throw new Error(data.message || 'Failed to refresh token');
+    }
+
+  } catch (err) {
+    console.error('Error refreshing access token:', err);
+    return null;
+  }
+}
+
+export {
+  loginApi, 
+  logoutApi,
+  refreshTokenApi
+};
