@@ -7,7 +7,7 @@ const fetchUsersFromApi = async (token) => {
   if (!token) return null;
 
   try {
-    const res = await fetch('http://127.0.0.1:4000/users', {
+    const res = await fetch('http://127.0.0.1:4000/api/admin/users', {
       method: 'GET',
       headers: {
         'Authorization' : `Bearer ${token.replace(/['"]+/g, '')}`,
@@ -37,7 +37,7 @@ const createUserApi = async (token, inputData) => {
   if (!token) return null;
 
   try {
-    const res = await fetch('http://127.0.0.1:4000/users', {
+    const res = await fetch('http://127.0.0.1:4000/api/admin/users', {
       method: 'POST',
       mode: 'cors',
       headers: {
