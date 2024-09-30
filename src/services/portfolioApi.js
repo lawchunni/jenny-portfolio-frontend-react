@@ -1,10 +1,12 @@
+import config from "../config";
+
 /** 
  * @Desc:  
  * fetch pofolio list from API
  */
 const fetchPortfolioFromAPI = async () => {
   try {
-    const res = await fetch('http://127.0.0.1:4000/api/portfolio-list', {
+    const res = await fetch(`${config.appBaseUrl}/api/portfolio-list`, {
       method: 'GET',
     });
     const result = await res.json();
@@ -25,7 +27,7 @@ const fetchPortfolioFromAPI = async () => {
  */
 const fetchAdminPortfolioFromAPI = async (token) => {
   try {
-    const res = await fetch('http://127.0.0.1:4000/api/admin/portfolio', {
+    const res = await fetch(`${config.appBaseUrl}/api/admin/portfolio`, {
       method: 'GET',
       headers: {
         'Authorization' : `Bearer ${token.replace(/['"]+/g, '')}`,
@@ -52,7 +54,7 @@ const fetchAdminPortfolioFromAPI = async (token) => {
 const fetchSelectedPortfolioFromAPI = async (token, path, id) => {
 
   try {
-    const res = await fetch(`http://127.0.0.1:4000/api/${path}/${id}`, {
+    const res = await fetch(`${config.appBaseUrl}/api/${path}/${id}`, {
       method: 'GET',
       headers: {
         'Authorization' : `Bearer ${token.replace(/['"]+/g, '')}`,
@@ -81,7 +83,7 @@ const fetchSelectedPortfolioFromAPI = async (token, path, id) => {
 const createPortfolioApi = async (token, inputData) => {
   
   try {
-    const res = await fetch(`http://127.0.0.1:4000/api/admin/portfolio`, {
+    const res = await fetch(`${config.appBaseUrl}/api/admin/portfolio`, {
       method: 'POST',
       mode: 'cors',
       headers: {
@@ -114,7 +116,7 @@ const createPortfolioApi = async (token, inputData) => {
 const updatePortfolioApi = async (token, path, id, inputData) => {
 
   try {
-    const res = await fetch(`http://127.0.0.1:4000/api/admin/${path}/${id}`, {
+    const res = await fetch(`${config.appBaseUrl}/api/admin/${path}/${id}`, {
       method: 'PUT',
       mode: 'cors',
       headers: {

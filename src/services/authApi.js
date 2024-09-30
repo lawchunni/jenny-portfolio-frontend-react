@@ -1,3 +1,5 @@
+import config from "../config";
+
 /** 
  * @Desc: 
  * username, password, isAdmin
@@ -6,7 +8,7 @@
 const loginApi = async (username, password) => {
 
   try {
-    const res = await fetch('http://127.0.0.1:4000/api/login', {
+    const res = await fetch(`${config.appBaseUrl}/api/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -35,7 +37,7 @@ const loginApi = async (username, password) => {
  */
 const logoutApi = async (refreshToken) => {
  try {
-  const res = await fetch('http://127.0.0.1:4000/api/logout', {
+  const res = await fetch(`${config.appBaseUrl}/api/logout`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -65,7 +67,7 @@ const refreshTokenApi = async (refreshToken) => {
   }
 
   try {
-    const res = await fetch('http://127.0.0.1:4000/api/refresh-token', {
+    const res = await fetch(`${config.appBaseUrl}/api/refresh-token`, {
       method: 'POST',
       // credentials: 'include',
       headers: {
