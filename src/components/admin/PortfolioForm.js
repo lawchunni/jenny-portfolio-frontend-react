@@ -169,7 +169,6 @@ const PortfolioForm = ({ type, data = null }) => {
       try {
         const sendFormToServer = await validateAndFetchData({
           fetchDataFunc: updatePortfolioApi, 
-          path: 'portfolio-edit', 
           id: id, 
           data: formData
         });

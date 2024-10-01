@@ -1,7 +1,7 @@
 import { jwtDecode } from "jwt-decode";
 import { useAuth } from "../contexts/AuthContext";
 import Cookies from 'js-cookie';
-import { refreshTokenApi } from "../services/authApi";
+import { refreshAccessTokenApi } from "../services/authApi";
 import { useCallback } from "react";
 
 // Helper to check if token is expired or about to expire
@@ -25,34 +25,33 @@ export const useTokenValidation = () => {
   const validateAndFetchData = useCallback( async ({
     fetchDataFunc,
     type = 'OTHER', // eg. 'OTHER', 'CREATE'
-    path = null, 
     id = null, 
     data = null
   } = {}) => {
-    // Check if the access token is expired
 
     if (!refreshToken) return null;
 
+    // Check if the access token is expired
     if (!accessToken || isTokenExpired(accessToken)) {
       console.log('Page reloaded / Access token is expired or expiring, refreshing...');
 
       // get new access token from server
-      const newAccessToken = await refreshTokenApi(refreshToken); 
+      const newAccessToken = await refreshAccessTokenApi(refreshToken); 
 
       if (newAccessToken) {
         setAccessToken(newAccessToken);
         
-        return type === 'CREATE' // for the api func which does not have path and data params
+        return type === 'CREATE' // for the api func which does not have data params
                   ? fetchDataFunc(newAccessToken, data)
-                  : fetchDataFunc(newAccessToken, path, id, data);
+                  : fetchDataFunc(newAccessToken, id, data);
       } else {
         throw new Error('Failed to refresh token');
       }
 
     } else {
-      return type === 'CREATE' // for the api func which does not have path and data params
+      return type === 'CREATE' // for the api func which does not have data params
                 ? fetchDataFunc(accessToken, data)
-                : fetchDataFunc(accessToken, path, id, data);
+                : fetchDataFunc(accessToken, id, data);
     }
 
   }, [accessToken, refreshToken, setAccessToken]);

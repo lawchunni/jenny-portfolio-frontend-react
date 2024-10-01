@@ -6,7 +6,7 @@ import PortfolioForm from "../../components/admin/PortfolioForm";
 import { useAuth } from "../../contexts/AuthContext";
 import { useLogout } from "../../hooks/useLogout";
 import { useTokenValidation } from "../../hooks/useTokenValidation";
-import { fetchSelectedPortfolioFromAPI } from "../../services/portfolioApi";
+import { fetchAdminPortfolioSingleFromAPI } from "../../services/portfolioApi";
 
 const PortfolioEdit = () => {
 
@@ -27,10 +27,9 @@ const PortfolioEdit = () => {
 
       try {
         // validate the token before fetching the data 
-        // Pass the api path and portfolio id to the server from here 
+        // Pass the portfolio id to the server from here 
         const fetchedData = await validateAndFetchData({
-          fetchDataFunc: fetchSelectedPortfolioFromAPI, 
-          path: 'admin/portfolio-edit', 
+          fetchDataFunc: fetchAdminPortfolioSingleFromAPI, 
           id: portfolioId.id
         });
 

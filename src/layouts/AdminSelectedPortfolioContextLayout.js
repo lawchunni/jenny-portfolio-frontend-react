@@ -1,9 +1,9 @@
 import { Outlet } from "react-router-dom"
 import { SelectedPortfolioContextProvider } from "../contexts/SelectedPortfolioContext"
 
-const AdminSelectedPortfolioContextLayout = ({path}) => {
+const AdminSelectedPortfolioContextLayout = () => {
   return (
-    <SelectedPortfolioContextProvider path={path} isAdmin={true}>
+    <SelectedPortfolioContextProvider isAdmin={true}>
       <Outlet />
     </SelectedPortfolioContextProvider>
   )

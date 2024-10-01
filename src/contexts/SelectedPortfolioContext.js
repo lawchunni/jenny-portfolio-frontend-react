@@ -1,14 +1,14 @@
 import { createContext, useEffect, useState } from "react"
-import { fetchSelectedPortfolioFromAPI } from "../services/portfolioApi";
+import { fetchPortfolioSingleFromAPI } from "../services/portfolioApi";
 
 const SelectedPortfolioContext = createContext();
 
 /**
  * 
- * @param {*} path to be passed into api to fetch data from database. eg. 'portfolio', 'admin/portfolio-edit'. No '/' in the front or at the end
+ * @param {*} 
  * @returns 
  */
-const SelectedPortfolioContextProvider = ({path, children, isAdmin = false}) => {
+const SelectedPortfolioContextProvider = ({children, isAdmin = false}) => {
 
   const [id, setId] = useState(null)
   const [data, setData] = useState([]);
@@ -24,7 +24,7 @@ const SelectedPortfolioContextProvider = ({path, children, isAdmin = false}) => 
       try {
         setError(false);
         
-        const fetchedData = await fetchSelectedPortfolioFromAPI(getToken, path, id);
+        const fetchedData = await fetchPortfolioSingleFromAPI(id);
         if(fetchedData) {
           setData(fetchedData);
           setLoading(false);
@@ -43,7 +43,7 @@ const SelectedPortfolioContextProvider = ({path, children, isAdmin = false}) => 
       fetchData('');
     }
 
-  }, [path, token, isAdmin, id]);
+  }, [token, isAdmin, id]);
 
   const updateId = (id) => {
     setId(id);

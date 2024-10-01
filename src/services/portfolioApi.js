@@ -6,7 +6,7 @@ import config from "../config";
  */
 const fetchPortfolioFromAPI = async () => {
   try {
-    const res = await fetch(`${config.appBaseUrl}/api/portfolio-list`, {
+    const res = await fetch(`${config.appBaseUrl}/api/portfolio/list`, {
       method: 'GET',
     });
     const result = await res.json();
@@ -23,11 +23,37 @@ const fetchPortfolioFromAPI = async () => {
 
 /** 
  * @Desc:  
+ * (id): portfolio item id
+ * fetch single portfolio item for public from API
+ */
+const fetchPortfolioSingleFromAPI = async (id) => {
+
+  try {
+    const res = await fetch(`${config.appBaseUrl}/api/portfolio/${id}`, {
+      method: 'GET',
+    });
+
+    const result = await res.json();
+
+    if (res.ok) {
+      return result;
+    } else {
+      alert('Failed to fetch data from api: ' + result.message);
+      return null;
+    }
+
+  } catch (err) {
+    throw new Error('Failed to fetch data from API');
+  }
+}
+
+/** 
+ * @Desc:  
  * fetch admin pofolio list from API
  */
 const fetchAdminPortfolioFromAPI = async (token) => {
   try {
-    const res = await fetch(`${config.appBaseUrl}/api/admin/portfolio`, {
+    const res = await fetch(`${config.appBaseUrl}/api/portfolio/admin/list`, {
       method: 'GET',
       headers: {
         'Authorization' : `Bearer ${token.replace(/['"]+/g, '')}`,
@@ -45,16 +71,16 @@ const fetchAdminPortfolioFromAPI = async (token) => {
   }
 };
 
+
 /** 
  * @Desc:  
- * (path): eg. admin/portfolio-edit
  * (id): portfolio item id
- * fetch single portfolio item from API
+ * fetch single portfolio item for public from API
  */
-const fetchSelectedPortfolioFromAPI = async (token, path, id) => {
+const fetchAdminPortfolioSingleFromAPI = async (token, id) => {
 
   try {
-    const res = await fetch(`${config.appBaseUrl}/api/${path}/${id}`, {
+    const res = await fetch(`${config.appBaseUrl}/api/portfolio/admin/${id}`, {
       method: 'GET',
       headers: {
         'Authorization' : `Bearer ${token.replace(/['"]+/g, '')}`,
@@ -83,7 +109,7 @@ const fetchSelectedPortfolioFromAPI = async (token, path, id) => {
 const createPortfolioApi = async (token, inputData) => {
   
   try {
-    const res = await fetch(`${config.appBaseUrl}/api/admin/portfolio`, {
+    const res = await fetch(`${config.appBaseUrl}/api/portfolio/admin/create`, {
       method: 'POST',
       mode: 'cors',
       headers: {
@@ -108,15 +134,14 @@ const createPortfolioApi = async (token, inputData) => {
 
 /** 
  * @Desc: 
- * (path): eg. portfolio-edit
  * (id): single portfolio id
  * (inputData): update item in object format
  * Update a record in portfolio collection
  */
-const updatePortfolioApi = async (token, path, id, inputData) => {
+const updatePortfolioApi = async (token, id, inputData) => {
 
   try {
-    const res = await fetch(`${config.appBaseUrl}/api/admin/${path}/${id}`, {
+    const res = await fetch(`${config.appBaseUrl}/api/portfolio/admin/update/${id}`, {
       method: 'PUT',
       mode: 'cors',
       headers: {
@@ -142,7 +167,8 @@ const updatePortfolioApi = async (token, path, id, inputData) => {
 export {
   fetchPortfolioFromAPI, 
   fetchAdminPortfolioFromAPI,
-  fetchSelectedPortfolioFromAPI,
+  fetchPortfolioSingleFromAPI,
+  fetchAdminPortfolioSingleFromAPI,
   createPortfolioApi,
   updatePortfolioApi
 };

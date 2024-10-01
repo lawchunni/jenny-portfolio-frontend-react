@@ -8,7 +8,7 @@ import config from "../config";
 const loginApi = async (username, password) => {
 
   try {
-    const res = await fetch(`${config.appBaseUrl}/api/login`, {
+    const res = await fetch(`${config.appBaseUrl}/api/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -37,7 +37,7 @@ const loginApi = async (username, password) => {
  */
 const logoutApi = async (refreshToken) => {
  try {
-  const res = await fetch(`${config.appBaseUrl}/api/logout`, {
+  const res = await fetch(`${config.appBaseUrl}/api/auth/logout`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -60,14 +60,14 @@ const logoutApi = async (refreshToken) => {
  * token: refreshToken from Cookies
  * Api for protected data to get new access token from server
  */
-const refreshTokenApi = async (refreshToken) => {
+const refreshAccessTokenApi = async (refreshToken) => {
 
   if (!refreshToken) {
     throw new Error('No refresh token found');
   }
 
   try {
-    const res = await fetch(`${config.appBaseUrl}/api/refresh-token`, {
+    const res = await fetch(`${config.appBaseUrl}/api/auth/refresh-access-token`, {
       method: 'POST',
       // credentials: 'include',
       headers: {
@@ -93,5 +93,5 @@ const refreshTokenApi = async (refreshToken) => {
 export {
   loginApi, 
   logoutApi,
-  refreshTokenApi
+  refreshAccessTokenApi
 };
