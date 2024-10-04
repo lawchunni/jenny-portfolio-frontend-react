@@ -376,14 +376,14 @@ const PortfolioForm = ({ type, data = null }) => {
         </p>
 
         <p>
-          <label htmlFor="deleted">Deleted</label>
+          <label htmlFor="deleted">Display</label>
           <select 
             id="deleted" 
             name="deleted" 
             defaultValue={data?.deleted ? data?.deleted : 'false'}
             {...register('deleted')} >
-            <option value="true">Yes</option>
-            <option value="false">No</option>
+            <option value="false">Yes</option>
+            <option value="true">No</option>
           </select>
           {errors.deleted && <span className="error">{errors.deleted?.message}</span>}
         </p>

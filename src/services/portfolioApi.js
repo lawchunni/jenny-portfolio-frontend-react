@@ -134,6 +134,7 @@ const createPortfolioApi = async (token, inputData) => {
 
 /** 
  * @Desc: 
+ * (token):Access token
  * (id): single portfolio id
  * (inputData): update item in object format
  * Update a record in portfolio collection

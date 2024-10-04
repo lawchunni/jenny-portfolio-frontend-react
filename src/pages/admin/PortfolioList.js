@@ -71,7 +71,7 @@ const { accessToken, getRefreshToken } = useAuth();
                   <div className="col col-2">Thumbnail</div>
                   <div className="col col-2">Tags</div>
                   <div className="col col-2">Highlight</div>
-                  <div className="col col-2">Deleted</div>
+                  <div className="col col-2">Display</div>
                   <div className="col col-1"></div>
                 </div>
                   {
@@ -89,11 +89,10 @@ const { accessToken, getRefreshToken } = useAuth();
                             }
                           </div>
                           <div className="col col-2">{item?.highlight ? 'Yes' : 'No'}</div>
-                          <div className="col col-2">{item?.deleted ? 'Yes' : 'No'}</div>
+                          <div className="col col-2">{item?.deleted ? 'No' : 'Yes'}</div>
                           <div className="col col-1 list_btn">
                             <Link to={`/admin/portfolio-edit/${item?._id}`}>Edit</Link>
 
-                            <a href="/" className="btn delete_btn" type="submit" name="delete" value="delete">delete</a>
                           </div>
                         </div>
                       )
