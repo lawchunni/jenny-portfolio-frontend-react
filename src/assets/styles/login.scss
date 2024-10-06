@@ -57,4 +57,9 @@
     margin: 0 auto;
     cursor: pointer;
   }
+
+  .error {
+    color: $text-color-attation-light;
+    font-weight: 600;
+  }
 }
