@@ -387,6 +387,21 @@ const PortfolioForm = ({ type, data = null }) => {
           </select>
           {errors.deleted && <span className="error">{errors.deleted?.message}</span>}
         </p>
+        
+        {
+          type === TYPE_UPDATE && <p>
+            <span className="left">Create Date</span>
+            <span className="right">{data?.create_date}</span>
+          </p>
+        }
+
+        {
+          type === TYPE_UPDATE && <p>
+            <span className="left">Update Date</span>
+            <span className="right">{data?.update_date}</span>
+          </p>
+        }
+        
 
         <p className="action_btn submit_btn">
           <button className="add_btn" type="submit">Submit</button>
