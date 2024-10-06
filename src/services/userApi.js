@@ -62,4 +62,35 @@ const createUserApi = async (token, inputData) => {
   }
 }
 
-export { fetchUsersFromApi, createUserApi };
+/** 
+ * @Desc: 
+ * (id): single portfolio id
+ * (inputData): update item in object format
+ * Delete a record in user collection
+ */
+const deleteUserApi = async (token, id) => {
+
+  try {
+    const res = await fetch(`${config.appBaseUrl}/api/users/admin/delete/${id}`, {
+      method: 'DELETE',
+      mode: 'cors',
+      headers: {
+        'Authorization' : `Bearer ${token.replace(/['"]+/g, '')}`,
+      },
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      alert(data.message);
+      return true;
+    } else {
+      alert(`Failed to delete user`);
+      return false;
+    }
+  } catch (error) {
+    alert('Error: ' + error.message);
+    return false;
+  }
+}
+
+export { fetchUsersFromApi, createUserApi, deleteUserApi };
