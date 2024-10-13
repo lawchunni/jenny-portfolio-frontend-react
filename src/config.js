@@ -3,7 +3,7 @@ const dev = {
 };
 
 const prod = {
-  appBaseUrl: 'http://jennypuichingchung.com'
+  appBaseUrl: 'http://api.jennypuichingchung.com'
 };
 
 const config = process.env.NODE_ENV === 'production' ? prod : dev;
