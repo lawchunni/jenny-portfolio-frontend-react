@@ -6,6 +6,7 @@ import { useLogout } from "../../hooks/useLogout";
 import { useTokenValidation } from "../../hooks/useTokenValidation";
 import { useAuth } from "../../contexts/AuthContext";
 import { fetchAdminPortfolioFromAPI } from "../../services/portfolioApi";
+import config from "../../config";
 
 const PortfolioList = () => {
   const [data, setData] = useState([]);
@@ -81,7 +82,7 @@ const { accessToken, getRefreshToken } = useAuth();
                           <div className="col col-1">{item?._id}</div>
                           <div className="col col-2">{item?.title}</div>
                           <div className="col col-2">
-                            <img src={'http://127.0.0.1:4000' + item?.thumbnail} alt={item?.title} width={80}/>
+                            <img src={config.appBaseUrl + item?.thumbnail} alt={item?.title} width={80}/>
                           </div>
                           <div className="col col-2">
                             {

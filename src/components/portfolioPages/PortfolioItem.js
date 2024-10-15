@@ -4,6 +4,7 @@ import Loading from "../common/Loading";
 import Error from "../common/Error";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import config from "../../config";
 
 function PortfolioItem ({id}) {
   const { data, loading, error, updateId } = useContext(SelectedPortfolioContext);
@@ -63,7 +64,7 @@ function PortfolioItem ({id}) {
               data?.images.map((item, index) => {
                 return (
                   <div className="item" key={index}>
-                    <img key={index} src={ `http://127.0.0.1:4000${item}`} alt="img desc" />
+                    <img key={index} src={config.appBaseUrl + item} alt="img desc" />
                   </div>
                 )
               })

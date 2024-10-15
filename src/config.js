@@ -1,11 +1,9 @@
-const dev = {
-  appBaseUrl: 'http://127.0.0.1:4000'
-};
+const env = process.env.REACT_APP_NODE_ENV;
 
-const prod = {
-  appBaseUrl: 'http://api.jennypuichingchung.com'
-};
+const appBaseUrl = env === 'production' ? process.env.REACT_APP_PROD_URI : process.env.REACT_APP_DEV_URI;
 
-const config = process.env.NODE_ENV === 'production' ? prod : dev;
+const config = {
+  appBaseUrl: appBaseUrl
+}
 
 export default config;

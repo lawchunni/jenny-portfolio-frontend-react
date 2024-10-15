@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import config from "../../config";
 
 /**
  * Reusable portfolio list item 
@@ -11,7 +12,7 @@ function PortfolioItems ({items}) {
       return (
         <div key={index} className="item">
           <h2>{ item?.title }</h2>
-          <div className="thumbnail" style={{backgroundImage: `url('http://127.0.0.1:4000${item?.thumbnail}')` }}>
+          <div className="thumbnail" style={{backgroundImage: `url('${config.appBaseUrl + item?.thumbnail}')` }}>
             <Link to={`/portfolio-details/${item?._id}`}></Link>
             <span className="view">View</span>
             <span className="cover"></span>

@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { useTokenValidation } from "../../hooks/useTokenValidation";
 import { useLogout } from "../../hooks/useLogout";
+import config from "../../config";
 
 const TYPE_CREATE = 'create';
 const TYPE_UPDATE = 'update';
@@ -238,7 +239,7 @@ const PortfolioForm = ({ type, data = null }) => {
           type === TYPE_UPDATE && <div>
             <div className="left"></div>
             <div className="right">
-              <img src={'http://127.0.0.1:4000' + data?.thumbnail}
+              <img src={config.appBaseUrl + data?.thumbnail}
                 alt={data?.title} width={60}/>
             </div>
           </div>
@@ -286,7 +287,7 @@ const PortfolioForm = ({ type, data = null }) => {
                 data?.images.map((item, index) => {
                   return (
                     <span className="preview_img" key={index}>
-                      <img src={'http://127.0.0.1:4000' + item} alt={item} width={60}/>
+                      <img src={config.appBaseUrl + item} alt={item} width={60}/>
                     </span>
                   )
                 })
