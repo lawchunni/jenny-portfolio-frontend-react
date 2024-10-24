@@ -58,6 +58,20 @@
       h2 {
         text-align: left;
       }
+
+      .portfolio_tag {
+        span {
+          font-weight: 600;
+          color: $text-color-grey;
+        }
+      }
+
+      .text {
+        margin-top: 20px;
+        a {
+          text-decoration: underline;
+        }
+      }
     }
   }
 }

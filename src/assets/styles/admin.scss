@@ -245,18 +245,27 @@
           cursor: pointer;
         }
       }
-      
+
+      input, textarea {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 13px!important;
+        line-height: 18px;
+      }
 
       input[type=radio] {
         margin: 15px 2px;
       }
 
-      input[type=text], input[type=password], textarea {
+      input[type=text], input[type=password], textarea, .quill {
         font-size: 16px;
         padding: 10px 5px;
         width: calc(100% - 205px);
         border: 1px solid #b8b8b8;
         outline: none;
+      }
+
+      .quill {
+        display: inline-block;
       }
 
       input[type=file], select {

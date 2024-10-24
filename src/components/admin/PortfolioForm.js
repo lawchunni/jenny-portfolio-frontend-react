@@ -4,12 +4,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import DOMPurify from "dompurify";
+import ReactQuill from 'react-quill-new';
 import { createPortfolioApi, updatePortfolioApi } from "../../services/portfolioApi";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { useTokenValidation } from "../../hooks/useTokenValidation";
 import { useLogout } from "../../hooks/useLogout";
 import config from "../../config";
+import 'react-quill-new/dist/quill.snow.css';
 
 const TYPE_CREATE = 'create';
 const TYPE_UPDATE = 'update';
@@ -33,7 +35,7 @@ const PortfolioForm = ({ type, data = null }) => {
               .test('fileSize', 'Max allowed size is 1 MB', 
                 value => !value || !value.length || Array.from(value).every(file => VALID_IMG_FORMAT.includes(file.type))),
     desc_short: yup.string().required('Short Desc is required').max(200, 'Short Desc must be under 200 charactors.'),
-    desc_long: yup.string().required('Long Desc is required').max(3000, 'Long Desc must be under 3000 charactors.'),
+    desc_long: yup.string().max(3000, 'Long Desc must be under 3000 charactors.'),
     tags: yup.string().required('Tags is required'),
     slug: yup.string().required('Slug is required').max(50, 'Slug must be under 50 charactors.')
   });
@@ -49,8 +51,12 @@ const PortfolioForm = ({ type, data = null }) => {
   const [selectedImages, setSelectedImages] = useState([]);
   const [imagePreview, setImagePreview] = useState([]);
 
+  // text editor for longtext field
+  const [longDesc, setLongDesc] = useState('');
+
   const navigate = useNavigate();
 
+  // Authentication
   const { getRefreshToken } = useAuth();
   const { validateAndFetchData } = useTokenValidation();
   const  logoutFromServer = useLogout();
@@ -124,7 +130,6 @@ const PortfolioForm = ({ type, data = null }) => {
     // ---- add data to formdata ---- //
     formData.append('title', DOMPurify.sanitize(newData.title));
     formData.append('desc_short', DOMPurify.sanitize(newData.desc_short));
-    formData.append('desc_long', DOMPurify.sanitize(newData.desc_long));
     formData.append('tags', santizedTags);
     formData.append('slug', DOMPurify.sanitize(newData.slug));
     formData.append('highlight', santizedHighlight);
@@ -138,6 +143,10 @@ const PortfolioForm = ({ type, data = null }) => {
       selectedImages.forEach((img) => {
         formData.append('images', img); 
       })
+    }
+
+    if (longDesc) {
+      formData.append('desc_long', DOMPurify.sanitize(longDesc));
     }
 
     if ( type === TYPE_CREATE ) {
@@ -199,14 +208,14 @@ const PortfolioForm = ({ type, data = null }) => {
       {/* ===========Form Started===========*/}
       <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data" noValidate>
         {
-          type === TYPE_UPDATE && <p>
+          type === TYPE_UPDATE && <div>
             <span className="left">Id</span>
             <span className="right">{data?._id}</span>
             <input type="hidden" name="id" defaultValue={data?._id && data?._id} {...register('_id')} />
-          </p>
+          </div>
         }
         
-        <p>
+        <div>
           <label htmlFor="title">Title</label>
           <input 
             type="text" 
@@ -217,9 +226,9 @@ const PortfolioForm = ({ type, data = null }) => {
             />
 
           {errors.title && <span className="error">{errors.title?.message}</span>}
-        </p>
+        </div>
 
-        <p> 
+        <div> 
           <label htmlFor="thumbnail">Thumbnail</label>
           <span className="upload_img">
             <input 
@@ -232,7 +241,7 @@ const PortfolioForm = ({ type, data = null }) => {
 
           {/* display in CREATE mode*/}
           {(type === TYPE_CREATE && errors.thumbnail_create) && <span className="error">{errors.thumbnail_create?.message}</span>}
-        </p>
+        </div>
 
         {/* display in UPDATE mode*/}
         {
@@ -250,16 +259,16 @@ const PortfolioForm = ({ type, data = null }) => {
             <div className="left"></div>
             <div className="right">
               <p>New Thumbnail Previews</p>
-                <div className="preview_img">
-                  <img src={thumbnailPreview} alt="thumbnail preview" width={60}/>
+              <div className="preview_img">
+                <img src={thumbnailPreview} alt="thumbnail preview" width={60}/>
 
-                  <button className="btn delete_btn delete_img" onClick={() => removeThumbnail()}>Delete</button>
-                </div>
+                <button className="btn delete_btn delete_img" onClick={() => removeThumbnail()}>Delete</button>
+              </div>
             </div>
           </div>
         }
 
-        <p> 
+        <div> 
           <label htmlFor="images">All Images</label>
           <span className="upload_img">
             <input 
@@ -276,7 +285,7 @@ const PortfolioForm = ({ type, data = null }) => {
 
           {/* display in UPDATE mode*/}
           {(type === TYPE_UPDATE && errors.images_update) && <span className="error">{errors.images_update?.message}</span>}
-        </p>
+        </div>
 
         {/* display in UPDATE mode*/}
         {
@@ -301,20 +310,20 @@ const PortfolioForm = ({ type, data = null }) => {
             <div className="left"></div>
             <div className="right">
               <p>New Images Previews</p>
-                {
-                  imagePreview?.map((preview, index) => (
-                    <div className="preview_img" key={index}>
-                      <img src={preview} alt={`Preview ${index}`} width={60}/>
-                      
-                      <button className="btn delete_btn delete_img" onClick={() => removeImages(index)}>Delete</button>
-                    </div>
-                  ))
-                }
+              {
+                imagePreview?.map((preview, index) => (
+                  <div className="preview_img" key={index}>
+                    <img src={preview} alt={`Preview ${index}`} width={60}/>
+                    
+                    <button className="btn delete_btn delete_img" onClick={() => removeImages(index)}>Delete</button>
+                  </div>
+                ))
+              }
             </div>
           </div>
         }
         
-        <p>
+        <div>
           <label htmlFor="desc_short">Short Desc</label>
           <textarea 
             name="desc_short" 
@@ -323,24 +332,24 @@ const PortfolioForm = ({ type, data = null }) => {
             rows="5" 
             defaultValue={data?.desc_short && data?.desc_short}
             {...register('desc_short')} ></textarea>
-          <span className="reminder">Limit: 200 words</span>
+          <span className="reminder">Limit: 200 charactors</span>
           {errors.desc_short && <span className="error">{errors.desc_short?.message}</span>}  
-        </p>
+        </div>
 
-        <p>
+        <div>
           <label htmlFor="desc_long">Long Desc</label>
-          <textarea 
-            name="desc_long" 
-            id="desc_long" 
-            cols="30" 
-            rows="10" 
+          
+          <ReactQuill
+            id="desc_long"
+            theme="snow"
             defaultValue={data?.desc_long && data?.desc_long}
-            {...register('desc_long')} ></textarea>
-          <span className="reminder">Limit: 3000 words</span>
+            onChange={setLongDesc}
+             ></ReactQuill>
+          <span className="reminder">Limit: 3000 charactors</span>
           {errors.desc_long && <span className="error">{errors.desc_long?.message}</span>}  
-        </p>
+        </div>
 
-        <p>
+        <div>
           <label htmlFor="tags">Technology tags</label>
           <input 
             type="text" 
@@ -350,9 +359,9 @@ const PortfolioForm = ({ type, data = null }) => {
             {...register('tags')} />
           <span className="reminder">Please use | as seperator. e.g. javascript|CSS|PHP</span>
           {errors.tags && <span className="error">{errors.tags?.message}</span>}
-        </p>
+        </div>
 
-        <p>
+        <div>
           <label htmlFor="slug">Slug</label>
           <input 
             type="text" 
@@ -361,9 +370,9 @@ const PortfolioForm = ({ type, data = null }) => {
             defaultValue={data?.slug && data?.slug}
             {...register('slug')} />
           {errors.slug && <span className="error">{errors.slug?.message}</span>}
-        </p>
+        </div>
 
-        <p>
+        <div>
           <label htmlFor="highlight">Highlight</label>
           <select 
             id="highlight" 
@@ -374,9 +383,9 @@ const PortfolioForm = ({ type, data = null }) => {
             <option value="false">No</option>
           </select>
           {errors.highlight && <span className="error">{errors.highlight?.message}</span>}
-        </p>
+        </div>
 
-        <p>
+        <div>
           <label htmlFor="deleted">Display</label>
           <select 
             id="deleted" 
@@ -387,26 +396,26 @@ const PortfolioForm = ({ type, data = null }) => {
             <option value="true">No</option>
           </select>
           {errors.deleted && <span className="error">{errors.deleted?.message}</span>}
-        </p>
+        </div>
         
         {
-          type === TYPE_UPDATE && <p>
+          type === TYPE_UPDATE && <div>
             <span className="left">Create Date</span>
             <span className="right">{data?.create_date}</span>
-          </p>
+          </div>
         }
 
         {
-          type === TYPE_UPDATE && <p>
+          type === TYPE_UPDATE && <div>
             <span className="left">Update Date</span>
             <span className="right">{data?.update_date}</span>
-          </p>
+          </div>
         }
         
 
-        <p className="action_btn submit_btn">
+        <div className="action_btn submit_btn">
           <button className="add_btn" type="submit">Submit</button>
-        </p>
+        </div>
       </form>
 
       {/* ===========Form End===========*/}

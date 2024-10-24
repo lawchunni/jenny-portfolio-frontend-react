@@ -57,7 +57,7 @@ function Home() {
               <Link to="/portfolio" title="Portfolio">Go to My Portfolio</Link>
               </div>
               <div className="indic_arr">
-              <span>Check out <br />ALL my works :)</span>
+              <span>Check out <br />ALL my work :)</span>
               <img src={ require('../assets/images/arrow.png') } alt="arrow" width={131} height={80} />
               </div>
             </div>

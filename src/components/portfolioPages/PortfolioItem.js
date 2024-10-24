@@ -1,13 +1,16 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { SelectedPortfolioContext } from "../../contexts/SelectedPortfolioContext";
 import Loading from "../common/Loading";
 import Error from "../common/Error";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import config from "../../config";
+import DOMPurify from "dompurify";
 
 function PortfolioItem ({id}) {
   const { data, loading, error, updateId } = useContext(SelectedPortfolioContext);
+
+  const [sanitizeDescLong, setSanitizeDescLong] = useState('');
 
   const responsive = {
     desktop: {
@@ -27,6 +30,11 @@ function PortfolioItem ({id}) {
   useEffect(() => {
     if (id) {
       updateId(id);
+    }
+
+    if (data && data.desc_long) {
+      const sanitizedData = DOMPurify.sanitize(data.desc_long);
+      setSanitizeDescLong(sanitizedData);
     }
   });
 
@@ -49,7 +57,7 @@ function PortfolioItem ({id}) {
             })}
             
           </div>
-          <p>{ data?.desc_long }</p>
+          <div className="text" dangerouslySetInnerHTML={{ __html: sanitizeDescLong}} />
         </div>
         
         <div className="thumbnails">
