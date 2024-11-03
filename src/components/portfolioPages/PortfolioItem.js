@@ -36,7 +36,7 @@ function PortfolioItem ({id}) {
       const sanitizedData = DOMPurify.sanitize(data.desc_long);
       setSanitizeDescLong(sanitizedData);
     }
-  });
+  }, [id, data, updateId]);
 
   if (loading) return (<><Loading /></>);
 

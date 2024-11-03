@@ -36,6 +36,8 @@ function PortfolioHighlights() {
                 </div>
               </div>
             )
+          } else {
+            return null;
           }
         })
       }

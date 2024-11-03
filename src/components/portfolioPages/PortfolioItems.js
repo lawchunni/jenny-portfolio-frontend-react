@@ -28,6 +28,8 @@ function PortfolioItems ({items}) {
           </div>
         </div>
       )
+    } else {
+      return null;
     }
   })
 }
